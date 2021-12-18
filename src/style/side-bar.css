@@ -1,0 +1,66 @@
+#side-bar{
+	width: 20%;
+	background-color: white;
+	display:  flex;
+	flex-direction: column;
+}
+#new-folder-button{
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 5%;
+	border-radius: 10px;
+}
+#new-folder-button:hover{
+	background-color: rgba(112,112,112,0.5);
+}
+#new-folder-icon{
+	height: 30px;
+	width: 30px;
+}
+#folder-list{
+	display: flex;
+	flex-direction: column;
+}
+#folder{
+	border-radius: 10px 10px 0px 0px;
+	cursor: pointer;
+	height: 50px;
+	display:  flex;
+	flex-direction: column;
+	justify-content: center;
+}
+#folder:hover{
+	background-color: rgba(112,112,112,0.5);
+}
+#folder-status{
+	display:  flex;
+	justify-content: space-around;
+	margin-top: 2%;
+}
+#folder-status > :nth-child(1){
+	color: blue;
+
+
+}#folder-status > :nth-child(2){
+	color: green;
+
+}#folder-status > :nth-child(3){
+	color: red;
+}
+
+.status-counter{
+	font-weight: bold;
+	background-color:white;
+	border-radius: 5px;
+	width: 20%;
+	text-align: center;
+}
+
+#folder-name{
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
