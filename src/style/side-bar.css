@@ -3,7 +3,7 @@
 	background-color: white;
 	display:  flex;
 	flex-direction: column;
-	overflow: overlay;
+	overflow: auto;
 }
 #new-folder-button{
 	cursor: pointer;
