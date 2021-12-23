@@ -21,11 +21,11 @@ export default function SideBar(props){
 	})/*,[reload]*/
 	
 	return (
-			//{data === undefined ?  <p>carregando</p> : 
+			//{data === undefined ?  <p>carregando</p> : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYzIxZmVkYWIyZjc2ZGYyN2QxNTQyYSIsImlhdCI6MTY0MDExMjM3MSwiZXhwIjoxNjQwMzcxNTcxfQ.iAdIe_THnLn14kwqVqtC1irM0h_IRiGfg8nEokuz6H8
 			<div id='side-bar'>
 				<div id='new-folder-button'>
 					<img id='new-folder-icon'src={folderIcon} alt="folderIcon"></img>
-					<p>N</p>
+					<p>New Folder</p>
 				</div>
 
 				<div id='folder-list'>

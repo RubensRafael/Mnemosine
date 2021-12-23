@@ -4,3 +4,10 @@
 	display: flex;
 	background-color: gray;
 }
+@media (max-width: 992px) {
+
+	#master{
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}

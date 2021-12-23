@@ -3,6 +3,7 @@
 	background-color: white;
 	display:  flex;
 	flex-direction: column;
+	overflow: overlay;
 }
 #new-folder-button{
 	cursor: pointer;
@@ -24,12 +25,14 @@
 	flex-direction: column;
 }
 #folder{
-	border-radius: 10px 10px 0px 0px;
+	border-radius: 10px 10px 10px 10px;
 	cursor: pointer;
 	height: 50px;
 	display:  flex;
 	flex-direction: column;
 	justify-content: center;
+	border: solid 1px rgba(112,112,112,0.5);
+	margin: 0px 10px 8px 10px;
 }
 #folder:hover{
 	background-color: rgba(112,112,112,0.5);
@@ -40,21 +43,21 @@
 	margin-top: 2%;
 }
 #folder-status > :nth-child(1){
-	color: blue;
+	background-color: blue;
 
 
 }#folder-status > :nth-child(2){
-	color: green;
+	background-color: green;
 
 }#folder-status > :nth-child(3){
-	color: red;
+	background-color: red;
 }
 
 .status-counter{
 	font-weight: bold;
-	background-color:white;
-	border-radius: 5px;
-	width: 20%;
+	color:white;
+	border-radius: 20px;
+	width: 10%;
 	text-align: center;
 }
 
@@ -63,4 +66,29 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+@media (max-width: 992px) {
+
+	#side-bar{
+		width: 100%;
+		height: 20%;
+		flex-direction: row;
+	}
+
+	#folder-list{
+		flex-direction: row;
+		align-items: center;
+
+	}
+
+	#folder{
+		width: 130px;
+		margin: 0px 5px 0px 5px;	
+
+	}
+
+	#new-folder-button{
+		margin: 0px 10px 0px 0px;
+	}
 }
