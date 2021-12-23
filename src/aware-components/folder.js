@@ -6,11 +6,11 @@ export default function Folder(props){
 	return(
 		<div id='folder'>
 			<div id='folder-status'>
-				<p className='status-counter' title='You have X notes here'>0</p>
-				<p className='status-counter' title='You have completed X notes here'>1</p>
-				<p className='status-counter' title='Have X notes atrasdas heres'>2</p>
+				<p className='status-counter' title={`You have ${props.folder.count} notes here`}>{props.folder.count}</p>
+				<p className='status-counter' title={`You have completed ${props.folder.completed} notes here`}>{props.folder.completed}</p>
+				<p className='status-counter' title='Have X notes atrasdas heres'>X</p>
 			</div>
-			<p id='folder-name' title='nomeaaaaaaaaaaaaaaaaaaaaaaaaa'>nomeaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+			<p id='folder-name' title='nomeaaaaaaaaaaaaaaaaaaaaaaaaa'>{props.folder.name}</p>
 		</div>
 	)
 }
