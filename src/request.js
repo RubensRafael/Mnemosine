@@ -1,10 +1,7 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  createHttpLink,
-  gql
+  createHttpLink
 } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 

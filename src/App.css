@@ -4,8 +4,95 @@
   box-sizing: border-box;
 }
 
+
+
 @media (min-width: 992px) {
 
+  ::scrollbar {
+    width: 8px;
+  }
+
+  ::scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 10px;
+    /*border: 6px solid transparent;*/
+    background-clip: content-box;
+  }
+
+  ::scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+
+  /*MOZILLA*/
+  ::-moz-scrollbar {
+    width: 8px;
+  }
+
+  ::-moz-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-moz-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 10px;
+    /*border: 6px solid transparent;*/
+    background-clip: content-box;
+  }
+
+  ::-moz-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+
+
+  /*EXPLORER*/
+  ::-ms-scrollbar {
+    width: 8px;
+  }
+
+  ::-ms-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-ms-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 10px;
+    /*border: 6px solid transparent;*/
+    background-clip: content-box;
+  }
+
+  ::-ms-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+
+  /*OPERA*/
+  ::-o-scrollbar {
+    width: 8px;
+  }
+
+  ::-o-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-o-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 10px;
+    /*border: 6px solid transparent;*/
+    background-clip: content-box;
+  }
+
+  ::-o-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+
+  /*WEBKIT*/
   ::-webkit-scrollbar {
     width: 8px;
   }

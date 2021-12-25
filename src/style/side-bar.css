@@ -3,7 +3,7 @@
 	background-color: white;
 	display:  flex;
 	flex-direction: column;
-	overflow: overlay;
+	overflow: auto;
 }
 #new-folder-button{
 	cursor: pointer;
@@ -19,6 +19,14 @@
 #new-folder-icon{
 	height: 30px;
 	width: 30px;
+}
+#new-folder-popup{
+	position: fixed;
+	display:  flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
 }
 #folder-list{
 	display: flex;
@@ -67,6 +75,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
 
 @media (max-width: 992px) {
 
