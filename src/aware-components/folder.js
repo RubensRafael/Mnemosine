@@ -1,5 +1,4 @@
 import React from 'react';
-import '../style/side-bar.css';
 
 
 export default function Folder(props){

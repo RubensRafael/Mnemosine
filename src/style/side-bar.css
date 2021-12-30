@@ -1,3 +1,4 @@
+/*GENERAL CSS*/
 #side-bar{
 	width: 20%;
 	background-color: white;
@@ -5,6 +6,8 @@
 	flex-direction: column;
 	overflow: auto;
 }
+
+/*NEW FOLDER CSS*/
 #new-folder-button{
 	cursor: pointer;
 	display: flex;
@@ -28,11 +31,93 @@
 	height: 100vh;
 	width: 100vw;
 	top: 0;
+	background-color:rgba(0,0,0,0.5)
 }
+#new-folder-box{
+	display:  flex;
+	flex-direction: column;
+	justify-content:space-around;
+	align-items: center;
+	background-color:white;
+	width: 60%;
+	height: 175px;
+	padding: 10px;
+	gap: 10px;
+}
+#new-folder-box > div{
+	display:  flex;
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+}
+#new-folder-box > :nth-child(3){
+	gap: 5px;
+	justify-content: flex-end;
+    padding: 5px;
+}
+#new-folder-error{
+	width: 100%;
+	color: red;
+}
+#new-folder-warn{
+	color: #2055c0;
+	width: 100%;
+}
+#new-folder-form{
+	width: 100%;
+}
+#new-folder-input{
+	border: none;
+	text-decoration: none;
+	outline: none;
+	border-bottom: 2px #2055c0 solid;
+	width: 100%;
+}
+#new-folder-cancel{
+	cursor: pointer;
+	color: #2055c0;
+}
+#new-folder-send{
+	cursor: pointer;
+	background-color: #2055c0;
+	color: white;
+	border-radius: 3px;
+	padding: 2px;
+}
+#new-folder-loading{
+	width: 50px;
+	height: 50px;
+}
+#new-folder-center-box-loading{
+	position: relative;
+}
+#new-folder-center-box-loading::before{
+	margin-top: 2px;
+	content: "";
+	width: 10%;
+	top: 100%;
+	left: 45%;
+	position: absolute;
+	border-bottom: 2px #2055c0 solid;
+	animation: NewFolderLoading infinite alternate 0.5s;
+}
+
+@keyframes NewFolderLoading{
+  0%{
+      left: 40%;
+  }
+  100%{
+      left: 50%;
+  }
+}
+
+/* FOLDER LIST CSS  */
 #folder-list{
 	display: flex;
 	flex-direction: column;
 }
+
+/* FOLDER CSS */
 #folder{
 	border-radius: 10px 10px 10px 10px;
 	cursor: pointer;
@@ -52,7 +137,7 @@
 	margin-top: 2%;
 }
 #folder-status > :nth-child(1){
-	background-color: blue;
+	background-color: #2055c0;
 
 
 }#folder-status > :nth-child(2){
@@ -82,7 +167,7 @@
 
 	#side-bar{
 		width: 100%;
-		height: 20%;
+		height: 15%;
 		flex-direction: row;
 	}
 
