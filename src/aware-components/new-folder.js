@@ -1,23 +1,27 @@
 import {React, useState} from 'react';
-import request from '../request';
+import client from '../request';
 import folderIcon from '../icons/new-folder.svg';
 import logo from '../icons/logo.png';
 import { CREATE_FOLDER } from '../querys';
+import { useDispatch } from 'react-redux';
+import { update } from '../redux/side-bar-slice';
 
 export default function NewFolder(){
 
+	let dispatch = useDispatch()
 	let [newFolderPopUp , setNewFolderPopUp] = useState(false);
 	let [value , setValue] = useState('');
 	let [reqStatus , setReqStatus] = useState({error:false,warn:'',loading:false});
 
 	async function createNewFolder(e){
 		e.preventDefault()
-		request.mutate({
+		client.mutate({
 			mutation: CREATE_FOLDER,
 			variables:{
 				inputName : value
 			}
 		}).then((res)=>{
+			dispatch(update())
 			setReqStatus({error:false,warn:`The folder "${res.data.createFolder.name}" was created with sucess.`,loading:false})
 		}).catch((err)=>{
 			setReqStatus({error:true,warn:err.networkError.result.errors[0].message,loading:false})
