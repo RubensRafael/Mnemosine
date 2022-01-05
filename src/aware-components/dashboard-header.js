@@ -1,4 +1,4 @@
-import React, { useState, useEffec } from 'react';
+import React, { useState, useEffect  } from 'react';
 import styled from 'styled-components';
 //import { useQuery } from '@apollo/client';
 //import { LOGIN_DEV_USER } from '../querys';
@@ -24,7 +24,7 @@ export default function DashboardHeader(props){
 			<DashboardHeaderBox>
 				<HeaderFolderInfo>
 					<form onSubmit={ ( e  ) => setNewName( { name: newName.name, editing: false   } )  } >
-						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editin ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewFolder({ name:e.target.value, editing: tru })}  ></HeaderFolderInput>
+						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editin ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewName({ name:e.target.value, editing: true  })}  ></HeaderFolderInput>
 					</form>
 					<TesteImg src={star} alt="Logo"></TesteImg>
 					<TesteImg onClick={ ()=> setNewName( { name: '', editing: true   } )  }  src={trash} alt="Logo"></TesteImg>
