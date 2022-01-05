@@ -24,7 +24,7 @@ export default function DashboardHeader(props){
 			<DashboardHeaderBox>
 				<HeaderFolderInfo>
 					<form onSubmit={ ( e  ) => setNewName( { name: newName.name, editing: false   } )  } >
-						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editing  ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewName({ name:e.target.value, editing: true  })}  ></HeaderFolderInput>
+						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editing  ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewName({ name:e.target.value, editing: true  })} onBlur={ ( e  ) => setNewName({ name:e.target.value, editing: false  })}  ></HeaderFolderInput>
 					</form>
 					<TesteImg src={star} alt="Logo"></TesteImg>
 					<TesteImg onClick={ ()=> setNewName( { name: '', editing: true   } )  }  src={trash} alt="Logo"></TesteImg>
