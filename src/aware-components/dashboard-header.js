@@ -15,7 +15,7 @@ export default function DashboardHeader(props){
 	
     useEffect(()=>{
 
-		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.nam  ){
+		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.name   ){
 			window.alert('mande')
 		}
 	},[newName.editing]  )
