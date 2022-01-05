@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffec } from 'react';
 import styled from 'styled-components';
 //import { useQuery } from '@apollo/client';
 //import { LOGIN_DEV_USER } from '../querys';
@@ -10,16 +10,24 @@ import time from '../icons/time.svg';
 
 
 export default function DashboardHeader(props){
-	const actualFolder = useSelector((state) => state.actualfolder.value)
+	const actualFolder = useSelector((state) => state.actualfolder.value);
+	const [newName, setNewName  ] = useState({ name:'', editing:false  })
 	
+    useEffect(()=>{
+
+		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.nam  ){
+			window.alert('mande')
+		}
+	},[newName.editing]  )
+
 	return (
 			<DashboardHeaderBox>
 				<HeaderFolderInfo>
-					<form>
-						<HeaderFolderInput type="text" readOnly={true} value={actualFolder.name}></HeaderFolderInput>
+					<form onSubmit={ ( e  ) => setNewName( { name: newName.name, editing: false   } )  } >
+						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editin ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewFolder({ name:e.target.value, editing: tru })}  ></HeaderFolderInput>
 					</form>
 					<TesteImg src={star} alt="Logo"></TesteImg>
-					<TesteImg src={trash} alt="Logo"></TesteImg>
+					<TesteImg onClick={ ()=> setNewName( { name: '', editing: true   } )  }  src={trash} alt="Logo"></TesteImg>
 					<TesteImg src={time} alt="Logo"></TesteImg>
 				</HeaderFolderInfo>
 			</DashboardHeaderBox>
