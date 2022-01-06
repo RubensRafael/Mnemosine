@@ -29,11 +29,8 @@ export default function SideBar(props){
 		if(data && !(actualFolder)){
 			// upando o main globalmente
 			let globalMain = folderList.find(element => element.isMain === true)
-			dispatch(change({
-				id:globalMain.id,
-				name:globalMain.name,
-				isMain:globalMain.isMain
-			}))
+			dispatch(change(globalMain))
+			
 		}
 		
 	})
@@ -45,6 +42,7 @@ export default function SideBar(props){
 	}
 	let folderList;
 	if(data){
+
 		folderList = JSON.parse(JSON.stringify(data.getUser.folderList))
 		// inverte a ordem, para mais recente por cima
 		folderList.reverse()

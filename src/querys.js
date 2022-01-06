@@ -12,9 +12,29 @@ export const CREATE_FOLDER = gql`
 	
 	mutation ($inputName : String!){
   		createFolder(folderName: $inputName){
-    		name
+  			_id,
+    		name,
+    		user{
+    			mainOrActualFolder{
+    				_id
+    			}
+    		}
   		}
 	}
+
+`
+
+export const CHANGE_FOLDER_NAME = gql`
+	
+	mutation ($inputName : String!,$folderId : String!){
+  		updateFolder(folderId: $folderId, newFolderName: $inputName){
+    		_id,
+    		name
+    		
+    
+  }
+}
+
 
 `
 export const FOLDER_LIST = gql`

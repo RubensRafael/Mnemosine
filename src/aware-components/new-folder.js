@@ -23,12 +23,9 @@ export default function NewFolder(){
 				inputName : value
 			}
 		}).then((res)=>{
+			let mainVerif = res.data.createFolder.user.mainOrActualFolder._id === res.data.createFolder._id
 			dispatch(update())
-			dispatch(change({
-				id:res.data.createFolder.id,
-				name:res.data.createFolder.name,
-				isMain:res.data.createFolder.isMain
-			}))
+			dispatch(change({...res.data.createFolder,...{isMain : mainVerif}}))
 			setReqStatus({error:false,warn:`The folder "${res.data.createFolder.name}" was created with sucess.`,loading:false})
 		}).catch((err)=>{
 			setReqStatus({error:true,warn:err.networkError.result.errors[0].message,loading:false})

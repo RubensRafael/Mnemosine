@@ -22,7 +22,7 @@ export default function Folder(props){
 
 
 	return(
-		<FolderBox onClick={()=> dispatch(change({id:props.folder.id,name:props.folder.name,isMain:props.folder.isMain}))} autoFocus={actualFolder.id === props.folder.id} active={actualFolder.id === props.folder._id}>
+		<FolderBox onClick={()=> dispatch(change(props.folder))} autoFocus={actualFolder.id === props.folder.id} active={actualFolder.id === props.folder._id}>
 			<FolderStatus>
 				<StatusCounter color="#2055c0" className='status-counter' title={`You have ${props.folder.count} notes here.`}>{props.folder.count}</StatusCounter>
 				<StatusCounter color="green" className='status-counter' title={`You have completed ${props.folder.completed} notes here.`}>{props.folder.completed}</StatusCounter>

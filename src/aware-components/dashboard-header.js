@@ -1,34 +1,59 @@
 import React, { useState, useEffect  } from 'react';
 import styled from 'styled-components';
-//import { useQuery } from '@apollo/client';
-//import { LOGIN_DEV_USER } from '../querys';
-//import client from '../request';
+import { useMutation } from '@apollo/client';
+import { CHANGE_FOLDER_NAME } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
+import { change } from '../redux/actual-folder';
+import { update } from '../redux/side-bar-slice';
 import star from '../icons/star.svg';
 import trash from '../icons/trash.svg';
 import time from '../icons/time.svg';
+import logo from '../icons/logo.png';
 
 
 export default function DashboardHeader(props){
+
 	const actualFolder = useSelector((state) => state.actualfolder.value);
-	const [newName, setNewName  ] = useState({ name:'', editing:false  })
+	const [newName, setNewName  ] = useState({ name:'', editing:false  });
+	const dispatch = useDispatch()
+
+	// atualizando a side bar, o header atualiza tambem porque é a side bar que eleva o folder atual globalmente
+	let nameChanged = () =>{
+		dispatch(update())
+	}
+
+	const [changeName, { data, loading, error }] = useMutation(CHANGE_FOLDER_NAME,{
+		onCompleted : nameChanged,
+	});
+
+
 	
     useEffect(()=>{
-
-		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.name   ){
-			window.alert('mande')
+    	
+		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.name){
+			
+			changeName({ variables: { inputName: newName.name,folderId : actualFolder._id} })
 		}
-	},[newName.editing]  )
+	},[newName.editing])
+
+	useEffect(()=>{
+		console.log('a')
+		setNewName({name: '', editing: false})
+	},[actualFolder.name])
 
 	return (
 			<DashboardHeaderBox>
 				<HeaderFolderInfo>
-					<form onSubmit={ ( e  ) => setNewName( { name: newName.name, editing: false   } )  } >
-						<HeaderFolderInput type="text" autoFocus={ newName.editing  }  readOnly={ !( newName.editing  ) }value={ newName.name ||  actualFolder.name} onChange={ ( e  ) => setNewName({ name:e.target.value, editing: true  })} onBlur={ ( e  ) => setNewName({ name:e.target.value, editing: false  })}  ></HeaderFolderInput>
+					<form onSubmit={(e) => {
+						e.preventDefault()
+						setNewName({name: newName.name, editing: false})
+					}}>
+						<HeaderFolderInput type="text" value={newName.editing ? newName.name : actualFolder.name} onChange={ (e) => setNewName({name:e.target.value, editing: true})} ></HeaderFolderInput>
+						<SendImg onClick={() => setNewName({name: newName.name, editing: false})} show={newName.editing}  src={star} alt="Send New Name Button"></SendImg>
+						<TesteImg onClick={()=> setNewName({name: actualFolder.name, editing: false })} show={newName.editing} src={trash} alt="Edit Icon"></TesteImg>
+						{loading ? <p>carregando</p> : ''}
 					</form>
-					<TesteImg src={star} alt="Logo"></TesteImg>
-					<TesteImg onClick={ ()=> setNewName( { name: '', editing: true   } )  }  src={trash} alt="Logo"></TesteImg>
-					<TesteImg src={time} alt="Logo"></TesteImg>
+					{error ? <p>{error.networkError.result.errors[0].message}</p> : ''}
 				</HeaderFolderInfo>
 			</DashboardHeaderBox>
 		)
@@ -60,4 +85,16 @@ const TesteImg = styled.img`
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
+	visibility:  ${({show}) => show ? "visible" : "hidden"};
+`
+const SendImg = styled.img`
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	border: 1px solid #2055c0;
+	visibility:  ${({show}) => show ? "visible" : "hidden"};
+
+	&:active{
+		background-color: #2055c0;
+	}
 `
