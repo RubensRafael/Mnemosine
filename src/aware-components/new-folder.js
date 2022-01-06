@@ -23,7 +23,7 @@ export default function NewFolder(){
 				inputName : value
 			}
 		}).then((res)=>{
-			let mainVerif = res.data.createFolder.user.mainOrActualFolder._id === res.data.createFolder._id
+			let mainVerif = res.data.createFolder.user.mainFolder === res.data.createFolder._id
 			dispatch(update())
 			dispatch(change({...res.data.createFolder,...{isMain : mainVerif}}))
 			setReqStatus({error:false,warn:`The folder "${res.data.createFolder.name}" was created with sucess.`,loading:false})
