@@ -48,7 +48,7 @@ export default function DashboardHeader(props){
 						e.preventDefault()
 						setNewName({name: newName.name, editing: false})
 					}}>
-						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name} onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} onBlur={ (e) => setNewName({name:e.target.value, editing: false, finish: false})} ></HeaderFolderInput>
+						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name} onChange={ (e) => setNewName({name:actualFolder.name, editing: true, finish: false})} onBlur={ (e) => setNewName({name:e.target.value, editing: false, finish: false})} ></HeaderFolderInput>
 						<SendImg onClick={() => setNewName({name: newName.name, editing: false, finish: true})} show={newName.editing}  src={star} alt="Send New Name Button"></SendImg>
 						<TesteImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} src={newName.editing ? trash : logo} alt="Edit Icon"></TesteImg>
 						{loading ? <p>carregando</p> : ''}
