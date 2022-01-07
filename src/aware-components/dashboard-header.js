@@ -14,7 +14,7 @@ import logo from '../icons/logo.png';
 export default function DashboardHeader(props){
 
 	const actualFolder = useSelector((state) => state.actualfolder.value);
-	const [newName, setNewName  ] = useState({ name:'', editing:false  });
+	const [newName, setNewName  ] = useState({ name:'', editing:false , finish: false});
 	const dispatch = useDispatch()
 
 	// atualizando a side bar, o header atualiza tambem porque é a side bar que eleva o folder atual globalmente
@@ -36,10 +36,10 @@ export default function DashboardHeader(props){
 		}
 	},[newName.editing])
 
-	useEffect(()=>{
+	/*useEffect(()=>{
 		console.log('a')
 		setNewName({name: '', editing: false})
-	},[actualFolder.name])
+	},[actualFolder.name])*/
 
 	return (
 			<DashboardHeaderBox>
@@ -48,9 +48,9 @@ export default function DashboardHeader(props){
 						e.preventDefault()
 						setNewName({name: newName.name, editing: false})
 					}}>
-						<HeaderFolderInput type="text" value={newName.editing ? newName.name : actualFolder.name} onChange={ (e) => setNewName({name:e.target.value, editing: true})} ></HeaderFolderInput>
-						<SendImg onClick={() => setNewName({name: newName.name, editing: false})} show={newName.editing}  src={star} alt="Send New Name Button"></SendImg>
-						<TesteImg onClick={()=> setNewName({name: actualFolder.name, editing: false })} show={newName.editing} src={trash} alt="Edit Icon"></TesteImg>
+						<HeaderFolderInput type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name} onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>
+						<SendImg onClick={() => setNewName({name: newName.name, editing: false, finish: true})} show={newName.editing}  src={star} alt="Send New Name Button"></SendImg>
+						<TesteImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} src={newName.editing ? trash : logo} alt="Edit Icon"></TesteImg>
 						{loading ? <p>carregando</p> : ''}
 					</form>
 					{error ? <p>{error.networkError.result.errors[0].message}</p> : ''}
@@ -85,7 +85,6 @@ const TesteImg = styled.img`
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
-	visibility:  ${({show}) => show ? "visible" : "hidden"};
 `
 const SendImg = styled.img`
 	width: 50px;
