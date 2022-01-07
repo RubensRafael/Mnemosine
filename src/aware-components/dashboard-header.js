@@ -26,7 +26,10 @@ export default function DashboardHeader(props){
 	const [changeName, { data, loading, error }] = useMutation(CHANGE_FOLDER_NAME,{
 		onCompleted : handleNameChanged,
 	});
-
+    
+	useEffect(()=>{
+		setNewName({name: '', editing: false, finish: false  })
+	},[ actualFolder  ])
 
 	
     useEffect(()=>{
