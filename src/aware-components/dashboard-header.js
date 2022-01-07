@@ -1,14 +1,17 @@
 import React, { useState, useEffect  } from 'react';
-import styled from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 import { useMutation } from '@apollo/client';
 import { CHANGE_FOLDER_NAME } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
-import { change } from '../redux/actual-folder';
+import { change, nameChanged } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
 import star from '../icons/star.svg';
 import trash from '../icons/trash.svg';
-import time from '../icons/time.svg';
+import send from '../icons/send.svg';
+import edit from '../icons/edit.svg';
 import logo from '../icons/logo.png';
+import load from '../icons/loading.svg';
+import reset from '../icons/reset.svg';
 
 
 export default function DashboardHeader(props){
@@ -17,13 +20,11 @@ export default function DashboardHeader(props){
 	const [newName, setNewName  ] = useState({ name:'', editing:false , finish: false});
 	const dispatch = useDispatch()
 
-	// atualizando a side bar, o header atualiza tambem porque é a side bar que eleva o folder atual globalmente
-	let nameChanged = () =>{
-		dispatch(update())
-	}
-
+	
+	// a side bar depende do actual folder, quando ele mudar ela atualiza tambem
+	let handleNameChanged = (data) =>{dispatch(update());dispatch(nameChanged(data.updateFolder.name))}
 	const [changeName, { data, loading, error }] = useMutation(CHANGE_FOLDER_NAME,{
-		onCompleted : nameChanged,
+		onCompleted : handleNameChanged,
 	});
 
 
@@ -31,47 +32,40 @@ export default function DashboardHeader(props){
     useEffect(()=>{
     	
 		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.name){
-			
 			changeName({ variables: { inputName: newName.name,folderId : actualFolder._id} })
 		}
 	},[newName.editing])
-
-	/*useEffect(()=>{
-		console.log('a')
-		setNewName({name: '', editing: false})
-	},[actualFolder.name])*/
+    
 
 	return (
 			<DashboardHeaderBox>
-				<HeaderFolderInfo>
-					<form onSubmit={(e) => {
-						e.preventDefault()
-						setNewName({name: newName.name, editing: false})
-					}}>
-						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name} onBlur={ (e) => setNewName({name:actualFolder.name, editing: false, finish: false})} onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>
-						<SendImg onClick={() => setNewName({name: newName.name, editing: false, finish: true})} show={newName.editing}  src={star} alt="Send New Name Button"></SendImg>
-						<TesteImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} src={newName.editing ? trash : logo} alt="Edit Icon"></TesteImg>
-						{loading ? <p>carregando</p> : ''}
+				
+					<form onSubmit={(e) => {e.preventDefault();setNewName({name: newName.name, editing: false, finish: true})}}>
+						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name} onBlur={ (e) => setNewName({name:actualFolder.name, editing: false, finish: false})} onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
 					</form>
-					{error ? <p>{error.networkError.result.errors[0].message}</p> : ''}
-				</HeaderFolderInfo>
+					
+					<SendImg isLoading={loading} show={newName.editing || loading}  src={!(loading) ? send : load} alt="Send New Name Button"></SendImg>
+					
+					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
+					
+					{true ? <HeaderWarn>error.networkError.result.errors[0].message</HeaderWarn> : ''}
+				
 			</DashboardHeaderBox>
 		)
 }
 const DashboardHeaderBox = styled.header`
 	width: 100%;
+	height: 100%;
 	display: flex;
+	background-color:white;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
+
 `
-const HeaderFolderInfo = styled.div`
-	width: 100%;
-	display:  flex;
-	align-items: center;
-	height: 10vh;
-	background-color:white;
-	
-`
+
 const HeaderFolderInput = styled.input`
 	border: none;
 	border: 2px solid gray;
@@ -81,19 +75,38 @@ const HeaderFolderInput = styled.input`
 	
 
 `
-const TesteImg = styled.img`
-	width: 50px;
-	height: 50px;
+const EditImg = styled.img`
+	width: ${({edit}) => edit ? "50px" : "30px"};;
+	height: ${({edit}) => edit ? "50px" : "30px"};;
 	cursor: pointer;
 `
-const SendImg = styled.img`
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
-	border: 1px solid #2055c0;
-	visibility:  ${({show}) => show ? "visible" : "hidden"};
 
-	&:active{
-		background-color: #2055c0;
-	}
+const HeaderWarn = styled.p`
+	flex-basis: 100%
+`
+
+const Loading = keyframes`
+  0%{
+      transform : rotate(0deg)
+  }
+  25%{
+      transform : rotate(90deg)
+  }
+  50%{
+  	  transform : rotate(180deg)
+  }
+  75%{
+  	  transform : rotate(270deg)
+  }
+  100%{
+  	  transform : rotate(360deg)
+  }
+`
+const SendImg = styled.img`
+	width: ${({isLoading}) => isLoading ? "50px" : "30px"};
+	height: ${({isLoading}) => isLoading ? "50px" : "30px"};
+	cursor: pointer;
+	visibility:  ${({show}) => show ? "visible" : "hidden"};
+	animation: ${({isLoading}) => isLoading && css`${Loading} infinite 0.5s`};
+	
 `

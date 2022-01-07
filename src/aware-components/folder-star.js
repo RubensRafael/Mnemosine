@@ -15,7 +15,9 @@ export default function Dashboard(props){
 	return (
 			<DashboardBox>
 				<SideBar></SideBar>
-				<DashboardHeader></DashboardHeader>
+				<DashboardContainer>
+					<DashboardHeader></DashboardHeader>
+				</DashboardContainer>
 			</DashboardBox>
 		)
 }
@@ -23,16 +25,19 @@ const DashboardBox = styled.main`
 	
 	margin-top: 15vh;
 	height: 85vh;
-	width: 100%;
-	display: grid;
-	grid-template-columns: 20% 80%
-	grid-template-rows: 10vh 75vh
+	display: flex;
 	background-color: gray;
 	
-	
 	@media (max-width: 992px) {
+
+	
 	display: flex;
 	flex-direction: column-reverse;
 	
 }
+`
+const DashboardContainer = styled.main`
+	display:  flex;
+	flex-direction: column;
+		
 `

@@ -24,9 +24,7 @@ export const CHANGE_FOLDER_NAME = gql`
 	mutation ($inputName : String!,$folderId : String!){
   		updateFolder(folderId: $folderId, newFolderName: $inputName){
     		_id,
-    		name
-    		
-    
+    		name    
   }
 }
 

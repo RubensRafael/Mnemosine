@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
 import {setMainFolder} from '../redux/userinfo-slice';
 import { useQuery } from '@apollo/client';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+import load from '../icons/loading.svg';
 
 
 
@@ -27,13 +28,19 @@ export default function SideBar(props){
 	},[update])
 
 	useEffect(()=>{
-		if(data && !(actualFolder)){
-			// upando o main globalmente
-			let globalMain = folderList.find(element => element.isMain === true)
-			dispatch(change(globalMain))
-			
-		}
 		
+		if(data && !(actualFolder)){
+			let firstActual = data.getUser.folderList.find(element => element.isMain === true)
+			// upando o main como o folder atual no primeiro carregamento
+			dispatch(change(firstActual))
+		}
+
+		if(data){
+				let firstActual = data.getUser.folderList.find(element => element.isMain === true)
+				//atualiza o main do usuário para renderizar estrelas
+				dispatch(setMainFolder(firstActual._id))
+		}
+
 	})
 
 	if(error){
@@ -49,7 +56,6 @@ export default function SideBar(props){
 		folderList.reverse()
 		// acha o main
 		let main = folderList.find(element => element.isMain === true)
-		dispatch(setMainFolder(main._id))
 		// muda o main de posição
 		let mainIndex = folderList.indexOf(main)
 		folderList.splice(mainIndex,1)
@@ -62,7 +68,7 @@ export default function SideBar(props){
 				
 				<NewFolder></NewFolder>
 				<FolderList>
-					{loading ? <p>loading</p> : folderList.map((folder)=>{
+					{loading ? <LoadingIcon src={load} alt={'loading'}></LoadingIcon> : folderList.map((folder)=>{
 						return <Folder key={folder._id} folder={folder}></Folder>
 					})}
 				</FolderList>
@@ -72,11 +78,13 @@ export default function SideBar(props){
 }
 
 const SideBarBox = styled.div`
-  width: 20%;
+  width: 100%;
 	background-color: white;
 	display:  flex;
 	flex-direction: column;
 	overflow: auto;
+	grid-column: 1 / 2;
+	grid-row: 1 / 3;
 	
 @media (max-width: 992px){
 		width: 100%;
@@ -93,4 +101,28 @@ const FolderList = styled.div`
 		align-items: center;
 
 	}
+`
+const Loading = keyframes`
+  0%{
+      transform : rotate(0deg)
+  }
+  25%{
+      transform : rotate(90deg)
+  }
+  50%{
+  	  transform : rotate(180deg)
+  }
+  75%{
+  	  transform : rotate(270deg)
+  }
+  100%{
+  	  transform : rotate(360deg)
+  }
+`
+const LoadingIcon = styled.img`
+	width: 50px;
+	height: 50px;
+	align-self: center;
+	animation: ${Loading} infinite 0.5s;
+	
 `
