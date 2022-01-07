@@ -3,7 +3,7 @@ import client from '../request';
 import folderIcon from '../icons/new-folder.svg';
 import logo from '../icons/logo.png';
 import { CREATE_FOLDER } from '../querys';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { update } from '../redux/side-bar-slice';
 import { change } from '../redux/actual-folder';
 import styled, { css, keyframes } from 'styled-components';

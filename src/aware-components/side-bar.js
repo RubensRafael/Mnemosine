@@ -49,7 +49,7 @@ export default function SideBar(props){
 		folderList.reverse()
 		// acha o main
 		let main = folderList.find(element => element.isMain === true)
-		dispatch(setMainFolder(globalMain._id))
+		dispatch(setMainFolder(main._id))
 		// muda o main de posição
 		let mainIndex = folderList.indexOf(main)
 		folderList.splice(mainIndex,1)
