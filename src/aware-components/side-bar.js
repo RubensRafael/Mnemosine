@@ -4,7 +4,7 @@ import NewFolder from './new-folder';
 import { FOLDER_LIST } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
-import {setMainFolder} from './userinfo-slice';
+import {setMainFolder} from './redux/userinfo-slice';
 import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
 
