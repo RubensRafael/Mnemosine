@@ -14,6 +14,7 @@ export default function NewFolder(){
 	let [newFolderPopUp , setNewFolderPopUp] = useState(false);
 	let [value , setValue] = useState('');
 	let [reqStatus , setReqStatus] = useState({error:false,warn:'',loading:false});
+	const userMainFolder = useSelector((state) => state.userinfo.value)
 
 	async function createNewFolder(e){
 		e.preventDefault()
@@ -23,7 +24,7 @@ export default function NewFolder(){
 				inputName : value
 			}
 		}).then((res)=>{
-			let mainVerif = res.data.createFolder.user.mainFolder === res.data.createFolder._id
+			let mainVerif = userMainFolder === res.data.createFolder._id
 			dispatch(update())
 			dispatch(change({...res.data.createFolder,...{isMain : mainVerif}}))
 			setReqStatus({error:false,warn:`The folder "${res.data.createFolder.name}" was created with sucess.`,loading:false})

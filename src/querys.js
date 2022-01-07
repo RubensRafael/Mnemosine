@@ -13,12 +13,7 @@ export const CREATE_FOLDER = gql`
 	mutation ($inputName : String!){
   		createFolder(folderName: $inputName){
   			_id,
-    		name,
-    		user{
-    			mainOrActualFolder{
-    				_id
-    			}
-    		}
+    		name
   		}
 	}
 

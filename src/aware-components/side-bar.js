@@ -4,6 +4,7 @@ import NewFolder from './new-folder';
 import { FOLDER_LIST } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
+import {setMainFolder} from './userinfo-slice';
 import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
 
@@ -48,7 +49,7 @@ export default function SideBar(props){
 		folderList.reverse()
 		// acha o main
 		let main = folderList.find(element => element.isMain === true)
-		
+		dispatch(setMainFolder(globalMain._id))
 		// muda o main de posição
 		let mainIndex = folderList.indexOf(main)
 		folderList.splice(mainIndex,1)
