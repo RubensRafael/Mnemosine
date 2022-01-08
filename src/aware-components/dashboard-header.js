@@ -66,6 +66,10 @@ const DashboardHeaderBox = styled.header`
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
 
+	@media(max-width: 992px)  {
+       grid-row: 1 / 2;
+	}
+
 `
 
 const HeaderFolderInput = styled.input`
