@@ -31,8 +31,9 @@ const DashboardBox = styled.main`
 	
 	
 	@media (max-width: 992px) {
-	display: flex;
-	flex-direction: column-reverse;
+	grid-template-columns : 100% ;
+	grid-template-rows: 10vh 60vh 15vh ;
+
 	
 }
 `

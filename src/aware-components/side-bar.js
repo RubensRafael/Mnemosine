@@ -78,7 +78,7 @@ export default function SideBar(props){
 }
 
 const SideBarBox = styled.div`
-  width: 100%;
+    width: 100%;
 	background-color: white;
 	display:  flex;
 	flex-direction: column;
@@ -88,7 +88,7 @@ const SideBarBox = styled.div`
 	
 @media (max-width: 992px){
 		width: 100%;
-		height: 15%;
+		height: 100%;
 		flex-direction: row;
 	}
 `
