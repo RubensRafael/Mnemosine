@@ -27,8 +27,8 @@ const DashboardBox = styled.main`
 	height: 85vh;
 	width: 100%;
 	display: grid;
-	grid-template-columns: 15% 85%
-	grid-template-rows: 10vh 75vh
+	grid-template-columns: 15% 85%;
+	grid-template-rows: 10vh 75vh;
 	background-color: gray;
 	
 	
