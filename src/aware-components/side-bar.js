@@ -90,7 +90,7 @@ const SideBarBox = styled.div`
 		width: 100%;
 		height: 100%;
 		flex-direction: row;
-		grid-row: 3 / 4;
+		
 	}
 `
 const FolderList = styled.div`
