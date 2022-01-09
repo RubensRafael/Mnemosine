@@ -16,7 +16,7 @@ export default function Dashboard(props){
 			<DashboardBox>
 				
 				<DashboardHeader></DashboardHeader>
-				<div> A  </div>
+				
 				<SideBar></SideBar>
 			</DashboardBox>
 		)
