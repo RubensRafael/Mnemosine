@@ -34,7 +34,7 @@ const DashboardBox = styled.main`
 	
 	@media (max-width: 992px) {
 	grid-template-columns : 100% ;
-	grid-template-rows: 10% 60% 15%;
+	grid-template-rows: 10vh 60vh 15vh;
 
 	
 }
