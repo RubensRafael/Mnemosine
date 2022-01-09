@@ -42,16 +42,17 @@ export default function DashboardHeader(props){
 
 	return (
 			<DashboardHeaderBox>
-				
+				<Wrapper>
 					<form onSubmit={(e) => {e.preventDefault();setNewName({name: newName.name, editing: false, finish: true})}}>
 						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
 					</form>
 					
 					<SendImg onClick={() => { if(!(loading)){setNewName({name: newName.name, editing: false, finish: true}) }  } } isLoading={loading} show={newName.editing || loading}  src={!(loading) ? send : load} alt="Send New Name Button"></SendImg>
-					
+					</Wrapper>
+				<Wrapper>
 					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
+				</Wrapper>
 					
-					{true ? <HeaderWarn>error.networkError.result.errors[0].message</HeaderWarn> : ''}
 				
 			</DashboardHeaderBox>
 		)
@@ -69,6 +70,14 @@ const DashboardHeaderBox = styled.header`
 	@media(max-width: 992px){
       grid-column: 1/2 ; 
       grid-row: 1/2;
+	}
+
+`
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+	@media(max-width: 992px){
+     flex-basis: 100%;
 	}
 
 `
