@@ -67,7 +67,8 @@ const DashboardHeaderBox = styled.header`
 	grid-row: 1 / 2;
 
 	@media(max-width: 992px){
-       
+      grid-column: 1/2 ; 
+      grid-row: 1/2;
 	}
 
 `
