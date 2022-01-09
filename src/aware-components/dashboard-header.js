@@ -89,7 +89,7 @@ const EditImg = styled.img`
 `
 
 const HeaderWarn = styled.p`
-	flex-basis: 100%
+	flex-basis: 100%;
 `
 
 const Loading = keyframes`
