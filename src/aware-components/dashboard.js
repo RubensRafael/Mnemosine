@@ -23,18 +23,18 @@ export default function Dashboard(props){
 }
 const DashboardBox = styled.main`
 	
-	margin-top: 15vh;
-	height: 85vh;
+	margin-top: 10vh;
+	height: 90vh;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 15% 85%;
-	grid-template-rows: 10vh 75vh;
+	grid-template-rows: 15vh 75vh;
 	background-color: gray;
 	
 	
 	@media (max-width: 992px) {
 	grid-template-columns : 100% ;
-	grid-template-rows: 10vh 60vh 15vh;
+	grid-template-rows: 15vh 60vh 15vh;
 
 	
 }
