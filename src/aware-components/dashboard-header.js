@@ -86,7 +86,7 @@ const HeaderFolderInput = styled.input`
 	border: none;
 	border: 2px solid gray;
 	outline:none;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-weight: bold;
 	
 
