@@ -44,7 +44,7 @@ export default function DashboardHeader(props){
 			<DashboardHeaderBox>
 				<Wrapper>
 					<form onSubmit={(e) => {e.preventDefault();setNewName({name: newName.name, editing: false, finish: true})}}>
-						<HeaderFolderInput autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
+						<HeaderFolderInput editing={ newName.editing   }  autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
 					</form>
 					
 					<SendImg onClick={() => { if(!(loading)){setNewName({name: newName.name, editing: false, finish: true}) }  } } isLoading={loading} show={newName.editing || loading}  src={!(loading) ? send : load} alt="Send New Name Button"></SendImg>
@@ -84,7 +84,7 @@ const Wrapper = styled.div`
 
 const HeaderFolderInput = styled.input`
 	border: none;
-	border: 2px solid gray;
+	border: 2px solid ${ ( { editing  } ) => editing ? "#2055c0" : "gray"   };
 	outline:none;
 	font-size: 1.5rem;
 	font-weight: bold;
