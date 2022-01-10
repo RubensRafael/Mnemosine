@@ -88,6 +88,10 @@ const HeaderFolderInput = styled.input`
 	outline:none;
 	font-size: 1.5rem;
 	font-weight: bold;
+
+	&:focus{
+		border:2px solid #2055c0;
+	}
 	
 
 `
