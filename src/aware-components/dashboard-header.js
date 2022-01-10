@@ -61,7 +61,7 @@ const DashboardHeaderBox = styled.header`
 	width: 100%;
 	height: 100%;
 	display: flex;
-	background-color:white;
+	background-color:aliceblue ;
 	align-items: center;
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
