@@ -11,21 +11,21 @@ export default function Star(props){
 	const actualFolder = useSelector((state) => state.actualfolder.value )
 	const dispatch = useDispatch()
 
-	let handleIsMainChanged = (data) =>{dispatch(update());dispatch(mainChanged(true  ))}
+	let handleIsMainChanged = (data) =>{dispatch(update());dispatch(mainChanged(true))}
 	const [changeToMain , { data, loading, error }] = useMutation(CHANGE_FOLDER_TOMAIN  ,{
 		onCompleted : handleIsMainChanged,
 	});
 
 	const colorByDefault = actualFolder.isMain ? "yellow" : "transp"
-	const colorByLoad = loading ? "gray" : false
-	const status = colorByLoad  || colorByDefault;
+	const status  = loading === true ? "gray" : colorByDefault
+	
 	
 	
 	return (
 			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualFolder._id}} )} >{ status }</StarBox>
 		)
 }
-const StarBox  = styled.main`
+const StarBox  = styled.div`
 	
 	
 	
