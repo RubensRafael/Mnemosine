@@ -21,7 +21,7 @@ export default function Star(props){
 	
 	
 	return (
-			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualfolder._id}} )} >{ colorByLoad || colorByDefault  }</Star>
+			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualfolder._id}} )} >{ colorByLoad || colorByDefault  }</StarBox>
 		)
 }
 const StarBox  = styled.main`
