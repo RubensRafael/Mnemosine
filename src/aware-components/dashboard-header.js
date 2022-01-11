@@ -3,14 +3,12 @@ import styled, {keyframes, css} from 'styled-components';
 import { useMutation } from '@apollo/client';
 import { CHANGE_FOLDER_NAME } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
-import { change, nameChanged } from '../redux/actual-folder';
+import { nameChanged } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
 import Star from './folder-star';
-import star from '../icons/star.svg';
-import trash from '../icons/trash.svg';
+import Trash from './trash';
 import send from '../icons/send.svg';
 import edit from '../icons/edit.svg';
-import logo from '../icons/logo.png';
 import load from '../icons/loading.svg';
 import reset from '../icons/reset.svg';
 
@@ -24,12 +22,13 @@ export default function DashboardHeader(props){
 	
 	// a side bar depende do actual folder, quando ele mudar ela atualiza tambem
 	let handleNameChanged = (data) =>{dispatch(update());dispatch(nameChanged(data.updateFolder.name))}
-	const [changeName, { data, loading, error }] = useMutation(CHANGE_FOLDER_NAME,{
+	const [changeName, { loading }] = useMutation(CHANGE_FOLDER_NAME,{
 		onCompleted : handleNameChanged,
 	});
     
 	useEffect(()=>{
 		setNewName({name: '', editing: false, finish: false  })
+		//eslint-disable-next-line
 	},[ actualFolder  ])
 
 	
@@ -38,6 +37,7 @@ export default function DashboardHeader(props){
 		if( newName.editing === false && newName.name !== '' && newName.name !== actualFolder.name){
 			changeName({ variables: { inputName: newName.name,folderId : actualFolder._id} })
 		}
+		//eslint-disable-next-line
 	},[newName.editing])
     
 
@@ -53,6 +53,7 @@ export default function DashboardHeader(props){
 				<Wrapper>
 					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
 					<Star></Star>
+					<Trash></Trash>
 				</Wrapper>
 					
 				
@@ -78,6 +79,7 @@ const DashboardHeaderBox = styled.header`
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
 	@media(max-width: 992px){
      flex-basis: 100%;
 	}
@@ -101,9 +103,7 @@ const EditImg = styled.img`
 	cursor: pointer;
 `
 
-const HeaderWarn = styled.p`
-	flex-basis: 100%;
-`
+
 
 const Loading = keyframes`
   0%{

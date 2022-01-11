@@ -12,7 +12,7 @@ export default function Star(props){
 	const dispatch = useDispatch()
 
 	const handleIsMainChanged = () =>{dispatch(update());dispatch(mainChanged(true))}
-	const [changeToMain , { data, loading, error }] = useMutation(CHANGE_FOLDER_TOMAIN  ,{
+	const [changeToMain , { data, loading, error }] = useMutation(CHANGE_FOLDER_TOMAIN ,{
 		onCompleted : handleIsMainChanged,
 	});
 
@@ -24,7 +24,7 @@ export default function Star(props){
 	
 	
 	return (
-			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualFolder._id}} )} >{ status }</StarBox>
+			<StarBox  onClick={ ()=> changeToMain({variables:{ folderId:  actualFolder._id}}) }  >{ status }</StarBox>
 		)
 }
 const StarBox  = styled.div`
