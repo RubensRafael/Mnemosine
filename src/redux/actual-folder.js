@@ -13,11 +13,14 @@ export const actualfolderSlice = createSlice({
     },
     nameChanged : (state,action) =>{
       state.value.name = action.payload
+    },
+    mainChanged: (state,action) => {
+      state.value.isMain = action.payload 
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { change, nameChanged } = actualfolderSlice.actions
+export const { change, nameChanged, mainChanged } = actualfolderSlice.actions
 
 export default actualfolderSlice.reducer

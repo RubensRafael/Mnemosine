@@ -26,10 +26,20 @@ export const CHANGE_FOLDER_NAME = gql`
     		_id,
     		name    
   }
-}
+}`
 
+export const CHANGE_FOLDER_TOMAIN = gql`
+    
+     mutation ($folderId: String!){
+		 updateFolder(folderId: $folderId,toMain: true){
+			 _id
+		 }
+	 }
 
 `
+
+
+
 export const FOLDER_LIST = gql`
 		query {
 				getUser{
@@ -44,4 +54,4 @@ export const FOLDER_LIST = gql`
 					
 				}
 			}
-		`
+`
