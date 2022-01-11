@@ -17,11 +17,12 @@ export default function Star(props){
 	});
 
 	const colorByDefault = actualFolder.isMain ? "yellow" : "transp"
-	const colorByLoad = loading ? "gray" : ''
+	const colorByLoad = loading ? "gray" : false
+	const status = colorByLoad  || colorByDefault;
 	
 	
 	return (
-			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualFolder._id}} )} >{ colorByLoad || colorByDefault  }</StarBox>
+			<StarBox  onClick={ changeToMain({ variables: { folderId:  actualFolder._id}} )} >{ status }</StarBox>
 		)
 }
 const StarBox  = styled.main`
