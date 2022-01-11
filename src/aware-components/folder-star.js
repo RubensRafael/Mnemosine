@@ -11,12 +11,12 @@ export default function Star(props){
 	const actualFolder = useSelector((state) => state.actualfolder.value )
 	const dispatch = useDispatch()
 
-	let handleIsMainChanged = (data) =>{dispatch(update());dispatch(mainChanged(true))}
+	const handleIsMainChanged = () =>{dispatch(update());dispatch(mainChanged(true))}
 	const [changeToMain , { data, loading, error }] = useMutation(CHANGE_FOLDER_TOMAIN  ,{
 		onCompleted : handleIsMainChanged,
 	});
 
-	window.alert(loading)
+	//window.alert(loading)
 
 	const colorByDefault = actualFolder.isMain ? "yellow" : "transp"
 	const status  = loading === true ? "gray" : colorByDefault

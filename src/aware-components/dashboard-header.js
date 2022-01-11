@@ -52,7 +52,7 @@ export default function DashboardHeader(props){
 					</Wrapper>
 				<Wrapper>
 					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
-					
+					<Star></Star>
 				</Wrapper>
 					
 				
