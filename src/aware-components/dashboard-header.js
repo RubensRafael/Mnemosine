@@ -5,6 +5,7 @@ import { CHANGE_FOLDER_NAME } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change, nameChanged } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
+import Star from './folder-star';
 import star from '../icons/star.svg';
 import trash from '../icons/trash.svg';
 import send from '../icons/send.svg';
@@ -51,6 +52,7 @@ export default function DashboardHeader(props){
 					</Wrapper>
 				<Wrapper>
 					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
+					<Star></Star>
 				</Wrapper>
 					
 				
