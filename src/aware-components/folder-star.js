@@ -16,6 +16,8 @@ export default function Star(props){
 		onCompleted : handleIsMainChanged,
 	});
 
+	window.alert(loading)
+
 	const colorByDefault = actualFolder.isMain ? "yellow" : "transp"
 	const status  = loading === true ? "gray" : colorByDefault
 	
