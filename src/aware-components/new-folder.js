@@ -101,7 +101,7 @@ const NewFolderBox = styled.div`
 	align-items: center;
 	background-color:white;
 	width: 60%;
-	height: 175px;
+	height: 200px;
 	padding: 10px;
 	gap: 10px;
 `
@@ -113,8 +113,8 @@ const NewFolderBoxChild = styled.div`
 `
 const NewFolderBoxChild3 = styled(NewFolderBoxChild)`
 	gap: 5px;
-	justify-content: flex-end;
-  padding: 5px;
+	justify-content : space-between;
+    padding: 5px;
 `
 const NewFolderMessage = styled.p`
  width: 100%;
@@ -131,16 +131,27 @@ const NewFolderInput = styled.input`
 	border-bottom: 2px #2055c0 solid;
 	width: 100%;
 `
+
+const NewFolderButtons  = styled.div`
+ 
+height : 30px;
+width : 100%;
+text-align: center:
+cursor: pointer;
+border-radius: 5px;
+padding: 2px;
+
+`
+
 const NewFolderCancel = styled.div`
-	cursor: pointer;
+	
 	color: #2055c0;
 `
 const NewFolderSend = styled.div`
-	cursor: pointer;
+	
 	background-color: #2055c0;
 	color: white;
-	border-radius: 3px;
-  padding: 2px;
+
 `
 const NewFolderLoadingImg = styled.img`
 	width: 50px;
