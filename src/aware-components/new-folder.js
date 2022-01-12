@@ -113,7 +113,7 @@ const NewFolderBoxChild = styled.div`
 `
 const NewFolderBoxChild3 = styled(NewFolderBoxChild)`
 	gap: 5px;
-	justify-content : space-between;
+	
     padding: 5px;
 `
 const NewFolderMessage = styled.p`
