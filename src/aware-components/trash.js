@@ -135,6 +135,6 @@ const TrashLi = styled.li`
     decoration: none;
 `
 
-const Trash = styled.p`
+const TrashP = styled.p`
     text-align: center;
 `
