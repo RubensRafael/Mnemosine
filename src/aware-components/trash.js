@@ -30,10 +30,10 @@ export default function Trash(props){
 								    <TrashLi>All your notes will be deleted along with the folder.</TrashLi>
 								    <TrashLi>Shared notes will not be deleted, they will be moved to your main folder.</TrashLi>
 							    </ul>
-							    <span>you cannot remove your main folder.</span>
+							    <span style={{color: "red"}}>You cannot remove your main folder.</span>
 							    <TrashChoose>
-								    <TrashConfirm  onClick={ () => removeFolder({variables:{folderId: actualFolder._id}}) }> <p>Confirm</p> </TrashConfirm>
-								    <TrashCancel onClick={ () => setWarn(false) }> <p>Cancel</p> </TrashCancel>
+								    <TrashConfirm  onClick={ () => removeFolder({variables:{folderId: actualFolder._id}}) }><div>Confirm</div></TrashConfirm>
+								    <TrashCancel onClick={ () => setWarn(false) }> <div>Cancel</div></TrashCancel>
 							    </TrashChoose>
 							</>: <div>CARREGANDO</div>}
 						</TrashWarn>
