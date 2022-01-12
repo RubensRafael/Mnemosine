@@ -5,6 +5,7 @@ import { REMOVE_FOLDER  } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
+import trash from '../icons/trash.svg';
 
 export default function Trash(props){
     
@@ -13,7 +14,7 @@ export default function Trash(props){
 	const dispatch = useDispatch()
 	
 	const handleRemove = () =>{dispatch(change(''));dispatch(update());setWarn(false)}
-	const [removeFolder , { data, loading, error }] = useMutation(REMOVE_FOLDER,{
+	const [removeFolder , { loading }] = useMutation(REMOVE_FOLDER,{
 		onCompleted : handleRemove,
 	});
 
@@ -37,7 +38,7 @@ export default function Trash(props){
 							    </TrashChoose>
 							</>: <div>CARREGANDO</div>}
 						</TrashWarn>
-				</TrashPopUp> : <TrashIcon onClick={ () =>{setWarn(true)} }>a</TrashIcon>}
+				</TrashPopUp> : <TrashIcon src={trash} onClick={ () =>{setWarn(true)} }></TrashIcon>}
 			
 		</>	
 			
@@ -46,8 +47,10 @@ export default function Trash(props){
 
 
 
-const TrashIcon = styled.div`
-	display:  flex;
+const TrashIcon = styled.img`
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
 
 `
 
@@ -83,10 +86,7 @@ const TrashChoose = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding:5px;
-	
-	
-	
+	padding:5px;	
 
 `
 
@@ -94,11 +94,12 @@ const TrashButton = styled.div`
      
     height : 30px;
 	width : 100%;
-	text-align: center:
+	text-align: center;
 	cursor: pointer;
 	border-radius: 5px;
-
-
+	align-items: center;
+    justify-content: center;
+    display: flex;
 	
 
 `

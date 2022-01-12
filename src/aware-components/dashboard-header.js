@@ -11,6 +11,8 @@ import send from '../icons/send.svg';
 import edit from '../icons/edit.svg';
 import load from '../icons/loading.svg';
 import reset from '../icons/reset.svg';
+import plus from '../icons/plus.svg';
+
 
 
 export default function DashboardHeader(props){
@@ -43,17 +45,18 @@ export default function DashboardHeader(props){
 
 	return (
 			<DashboardHeaderBox>
-				<Wrapper>
+				<WrapperClose>
 					<form onSubmit={(e) => {e.preventDefault();setNewName({name: newName.name, editing: false, finish: true})}}>
 						<HeaderFolderInput editing={ newName.editing   }  autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
 					</form>
 					
 					<SendImg onClick={() => { if(!(loading)){setNewName({name: newName.name, editing: false, finish: true}) }  } } isLoading={loading} show={newName.editing || loading}  src={!(loading) ? send : load} alt="Send New Name Button"></SendImg>
-					</Wrapper>
+					</WrapperClose>
 				<Wrapper>
-					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} edit={newName.editing} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
+					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
 					<Star></Star>
 					<Trash></Trash>
+					<EditImg src={plus} alt="plus"></EditImg>
 				</Wrapper>
 					
 				
@@ -85,6 +88,11 @@ const Wrapper = styled.div`
 	}
 
 `
+const WrapperClose = styled(Wrapper)`
+	
+	gap: 0px;
+
+`
 
 const HeaderFolderInput = styled.input`
 	border: none;
@@ -97,10 +105,12 @@ const HeaderFolderInput = styled.input`
 	
 
 `
+
+
 const EditImg = styled.img`
-	width: ${({edit}) => edit ? "50px" : "30px"};;
-	height: ${({edit}) => edit ? "50px" : "30px"};;
-	cursor: pointer;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
 `
 
 
@@ -123,8 +133,8 @@ const Loading = keyframes`
   }
 `
 const SendImg = styled.img`
-	width: ${({isLoading}) => isLoading ? "50px" : "30px"};
-	height: ${({isLoading}) => isLoading ? "50px" : "30px"};
+	width: 40px;
+	height: 40px;
 	cursor: pointer;
 	visibility:  ${({show}) => show ? "visible" : "hidden"};
 	animation: ${({isLoading}) => isLoading && css`${Loading} infinite 0.5s`};

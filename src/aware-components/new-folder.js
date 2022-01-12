@@ -3,7 +3,7 @@ import client from '../request';
 import folderIcon from '../icons/new-folder.svg';
 import logo from '../icons/logo.png';
 import { CREATE_FOLDER } from '../querys';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { update } from '../redux/side-bar-slice';
 import { change } from '../redux/actual-folder';
 import styled, { css, keyframes } from 'styled-components';
@@ -59,7 +59,6 @@ export default function NewFolder(){
 			</NewFolderBox>
 		</NewFolderPopup>}
 	</>	
-
 		)
 }
 
@@ -113,8 +112,10 @@ const NewFolderBoxChild = styled.div`
 `
 const NewFolderBoxChild3 = styled(NewFolderBoxChild)`
 	gap: 5px;
-	
-    padding: 5px;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 `
 const NewFolderMessage = styled.p`
  width: 100%;
@@ -134,12 +135,12 @@ const NewFolderInput = styled.input`
 
 const NewFolderButtons  = styled.div`
  
-height : 30px;
-width : 100%;
-text-align: center:
-cursor: pointer;
-border-radius: 5px;
-padding: 2px;
+  height : 30px;
+  width : 100%;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	padding: 2px;
 
 `
 
