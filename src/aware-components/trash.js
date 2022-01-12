@@ -67,7 +67,7 @@ const TrashPopUp = styled.div`
 `
 
 const TrashWarn = styled.div`
-	height: 175px;
+	height: 200px;
 	width: 60%;
 	display: flex;
 	flex-direction: column;
@@ -132,7 +132,7 @@ const TrashCancel = styled(TrashButton)`
 
 const TrashLi = styled.li`
     
-    decoration: none;
+    list-style: none;
 `
 
 const TrashP = styled.p`
