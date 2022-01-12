@@ -92,10 +92,6 @@ const TrashButton = styled.div`
      
     height : 30px;
 	width : 100%;
-	display: flex;
-	align-itens: center;
-	justify-content: center;
-	flex-direction: column;
 	text-align: center:
 	cursor: pointer;
 	border-radius: 5px;
