@@ -25,10 +25,10 @@ export default function Trash(props){
 			{warn ? <TrashPopUp>
 						<TrashWarn>
 							{ !(loading) ? <>
-							    <p>You are trying to remove a folder.<br></br>The following procedures will take place:</p>
+							    <TrashP>You are trying to remove a folder.<br></br>The following procedures will take place:</TrashP>
 							    <ul>
-								    <li>All your notes will be deleted along with the folder.</li>
-								    <li>Shared notes will not be deleted, they will be moved to your main folder.</li>
+								    <TrashLi>All your notes will be deleted along with the folder.</TrashLi>
+								    <TrashLi>Shared notes will not be deleted, they will be moved to your main folder.</TrashLi>
 							    </ul>
 							    <span>you cannot remove your main folder.</span>
 							    <TrashChoose>
@@ -74,6 +74,7 @@ const TrashWarn = styled.div`
 	align-items:center;
 	justify-content:space-around;
 	background-color:white;
+	padding: 5px;
 
 `
 
@@ -82,7 +83,7 @@ const TrashChoose = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding : 5px;
+	
 	
 
 `
@@ -127,4 +128,13 @@ const TrashCancel = styled(TrashButton)`
 		background-color: rgba(255,0,0,0.67);
 	}
 
+`
+
+const TrashLi = styled.li`
+    
+    decoration: none;
+`
+
+const Trash = styled.p`
+    text-align: center;
 `
