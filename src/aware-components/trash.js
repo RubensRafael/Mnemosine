@@ -79,30 +79,26 @@ const TrashWarn = styled.div`
 
 const TrashChoose = styled.div`
 	width:100%;
-	display:  flex;
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding : 5px;
 	
 
 `
 
 const TrashButton = styled.div`
      
-    height : 50px;
+    height : 30px;
 	width : 100%;
-	text-align: center;
-	vertical-align: middle;
+	display: flex;
+	align-itens: center;
+	justify-content: space-around;
 	cursor: pointer;
 	border-radius: 5px;
+
+
 	
-
-	&:hover{
-       background-color: gray;
-	}
-
-	&:active{
-		background-color: gray;
-	}
 
 `
 
@@ -111,10 +107,24 @@ const TrashConfirm = styled(TrashButton)`
 	color: red;
 	background-color:white;
 
+	&:hover{
+		background-color: gray;
+	 }
+	 &:active{
+		 background-color: gray;
+	 }
+
 `
 
 const TrashCancel = styled(TrashButton)`
 	background-color: red;
 	color:white;
+
+	&:hover{
+		background-color: rgba(255,0,0,0.67);
+	}
+	&:active{
+		background-color: rgba(255,0,0,0.67);
+	}
 
 `
