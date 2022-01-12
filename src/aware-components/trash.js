@@ -32,7 +32,7 @@ export default function Trash(props){
 							    </ul>
 							    <span style={{color: "red"}}>You cannot remove your main folder.</span>
 							    <TrashChoose>
-								    <TrashConfirm  onClick={ () => removeFolder({variables:{folderId: actualFolder._id}}) }><div>Confirm</div></TrashConfirm>
+								    <TrashConfirm  onClick={ () => {actualFolder.isMain ? '' : removeFolder({variables:{folderId: actualFolder._id}})}}><div>Confirm</div></TrashConfirm>
 								    <TrashCancel onClick={ () => setWarn(false) }> <div>Cancel</div></TrashCancel>
 							    </TrashChoose>
 							</>: <div>CARREGANDO</div>}
