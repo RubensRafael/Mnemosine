@@ -67,7 +67,7 @@ const TrashPopUp = styled.div`
 `
 
 const TrashWarn = styled.div`
-	
+	height: 175px;
 	width: 60%;
 	display: flex;
 	flex-direction: column;
