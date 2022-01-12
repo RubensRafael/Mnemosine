@@ -52,10 +52,10 @@ export default function NewFolder(){
 						<NewFolderInput autoFocus={true} placeholder="Input the name of your folder." value={value} onChange={(e) => setValue(e.target.value)} type="text"></NewFolderInput>
 					</NewFolderForm>}
 				</NewFolderBoxChild2>
-				{ reqStatus.loading ? '' : <NewFolderBoxChild3>
-					<NewFolderCancel onClick={() => setNewFolderPopUp(false)}>Cancel</NewFolderCancel>
-					<NewFolderSend onClick={createNewFolder}>Send</NewFolderSend>
-				</NewFolderBoxChild3>}
+				<NewFolderBoxChild3>
+					{ reqStatus.loading ? '' : <><NewFolderCancel onClick={() => setNewFolderPopUp(false)}>Cancel</NewFolderCancel>
+					<NewFolderSend onClick={createNewFolder}>Send</NewFolderSend></>}
+				</NewFolderBoxChild3>
 			</NewFolderBox>
 		</NewFolderPopup>}
 	</>	
