@@ -81,17 +81,20 @@ const TrashChoose = styled.div`
 	width:100%;
 	display:  flex;
 	align-items: center;
+	justify-content: space-between;
 	
 
 `
 
 const TrashButton = styled.div`
      
-    height : 75px;
+    height : 50px;
 	width : 100%;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
+	border-radius: 5px;
+	
 
 	&:hover{
        background-color: gray;
