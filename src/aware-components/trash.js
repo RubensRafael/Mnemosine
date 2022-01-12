@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation  } from '@apollo/client';
-import { CHANGE_FOLDER_TOMAIN  } from '../querys';
+import { REMOVE_FOLDER  } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
