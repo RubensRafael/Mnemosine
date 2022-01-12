@@ -8,11 +8,11 @@ import { update } from '../redux/side-bar-slice';
 
 export default function Trash(props){
     
+	const [warn, setWarn] = useState(false)
 	const actualFolder = useSelector((state) => state.actualfolder.value)
 	const dispatch = useDispatch()
-	const [warn, setWarn] = useState(false)
-
-	const handleRemove = () =>{dispatch(change(''));dispatch(update())}
+	
+	const handleRemove = () =>{dispatch(change(''));dispatch(update());setWarn(false)}
 	const [removeFolder , { data, loading, error }] = useMutation(REMOVE_FOLDER,{
 		onCompleted : handleRemove,
 	});
