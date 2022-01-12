@@ -12,7 +12,7 @@ export default function Trash(props){
 	const dispatch = useDispatch()
 	const [warn, setWarn] = useState(false)
 
-	const handleRemove = () =>{dispatch(changed(''));dispatch(update())}
+	const handleRemove = () =>{dispatch(change(''));dispatch(update())}
 	const [removeFolder , { data, loading, error }] = useMutation(REMOVE_FOLDER,{
 		onCompleted : handleRemove,
 	});
@@ -32,7 +32,7 @@ export default function Trash(props){
 							    </ul>
 							    <span>you cannot remove your main folder.</span>
 							    <TrashChoose>
-								    <TrashConfirm  Onclick={ () => removeFolder({variables:{folderId: actualFolder_id}}) }>Confirm</TrashConfirm>
+								    <TrashConfirm  Onclick={ () => removeFolder({variables:{folderId: actualFolder._id}}) }>Confirm</TrashConfirm>
 								    <TrashCancel onClick={ () => setWarn(false) }>Cancel</TrashCancel>
 							    </TrashChoose>
 							</>: <div>CARREGANDO</div>}
