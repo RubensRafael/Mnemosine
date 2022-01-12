@@ -143,11 +143,11 @@ padding: 2px;
 
 `
 
-const NewFolderCancel = styled.div`
+const NewFolderCancel = styled(NewFolderButtons)`
 	
 	color: #2055c0;
 `
-const NewFolderSend = styled.div`
+const NewFolderSend = styled(NewFolderButtons)`
 	
 	background-color: #2055c0;
 	color: white;
