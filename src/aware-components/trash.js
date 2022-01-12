@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import { useMutation  } from '@apollo/client';
 import { CHANGE_FOLDER_TOMAIN  } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
-import { mainChanged } from '../redux/actual-folder';
+import { change } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
 
 export default function Trash(props){
     
-	
+	const actualFolder = useSelector((state) => state.actualfolder.value)
 	const dispatch = useDispatch()
 	const [warn, setWarn] = useState(false)
 
-	//const handleIsMainChanged = () =>{dispatch(update());dispatch(mainChanged(true))}
-	//const [changeToMain , { data, loading, error }] = useMutation(CHANGE_FOLDER_TOMAIN ,{
-	//	onCompleted : handleIsMainChanged,
-	//});
+	const handleRemove = () =>{dispatch(changed(''));dispatch(update())}
+	const [removeFolder , { data, loading, error }] = useMutation(REMOVE_FOLDER,{
+		onCompleted : handleRemove,
+	});
 
 	
 	
@@ -24,17 +24,18 @@ export default function Trash(props){
 		<>
 			{warn ? <TrashPopUp>
 						<TrashWarn>
-							<p>You are trying to remove a folder.<br></br>The following procedures will take place:</p>
-							<ul>
-								<li>All your notes will be deleted along with the folder.</li>
-								<li>Shared notes will not be deleted, they will be moved to your main folder.</li>
-							</ul>
-							<span>you cannot remove your main folder.</span>
-							<TrashChoose>
-								<TrashConfirm>Confirm</TrashConfirm>
-								<TrashCancel onClick={ () => setWarn(false) }>Cancel</TrashCancel>
-
-							</TrashChoose>
+							{ !(loading) ? <>
+							    <p>You are trying to remove a folder.<br></br>The following procedures will take place:</p>
+							    <ul>
+								    <li>All your notes will be deleted along with the folder.</li>
+								    <li>Shared notes will not be deleted, they will be moved to your main folder.</li>
+							    </ul>
+							    <span>you cannot remove your main folder.</span>
+							    <TrashChoose>
+								    <TrashConfirm  Onclick={ () => removeFolder({variables:{folderId: actualFolder_id}}) }>Confirm</TrashConfirm>
+								    <TrashCancel onClick={ () => setWarn(false) }>Cancel</TrashCancel>
+							    </TrashChoose>
+							</>: <div>CARREGANDO</div>}
 						</TrashWarn>
 				</TrashPopUp> : <TrashIcon onClick={ () =>{setWarn(true)} }>a</TrashIcon>}
 			
