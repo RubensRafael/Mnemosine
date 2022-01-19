@@ -1,4 +1,5 @@
 import React from 'react';
+import MainSwitcher from './dashboard-main/main-switcher';
 import SideBar from './side-bar';
 import DashboardHeader from './dashboard-header';
 import styled from 'styled-components';
@@ -16,7 +17,7 @@ export default function Dashboard(props){
 			<DashboardBox>
 				
 				<DashboardHeader></DashboardHeader>
-				
+				<MainSwitcher></MainSwitcher>
 				<SideBar></SideBar>
 			</DashboardBox>
 		)

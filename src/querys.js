@@ -64,3 +64,14 @@ export const FOLDER_LIST = gql`
 				}
 			}
 `
+
+export const CREATE_NOTE = gql`
+
+	mutation($title: String!,$content:String!,$folderId: String!,$expiresIn:String!,$createdAt:String!){
+		createNote(title:$title , content:$content , createdAt: $createdAt , expiresIn:$expiresIn,folderId:$folderId  ){
+			_id,
+			title
+		}
+	}
+
+`
