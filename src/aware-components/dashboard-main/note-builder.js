@@ -63,6 +63,11 @@ export default function NoteBuilder(props){
     }
 
 }
+	const today = new Date()
+const day = today.getDate() + 1
+const month = today.getMonth()
+const year = today.getYear()
+const tomorrow = `${year}/${month === 0 ? 12 : month}/${day}`
 	
 	return (
 			
@@ -70,11 +75,11 @@ export default function NoteBuilder(props){
 
     <input type="text"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value))}}></input>
     <textarea value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></textarea>
-    <input readOnly={newNote.never}  type="date" value={newNote.date} onChange={(e)=>{dispatch(setNoteDate(e.target.value))}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
+    <input readOnly={newNote.never}  type="date" value={newNote.date} min={tomorrow} onChange={(e)=>{dispatch(setNoteDate(e.target.value))}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
     <input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value))}} required={true}></input>
     <input id="neve" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(e.target.value))}}></input>
 	<label htmlFor="neve"  >Set never</label>
-    <button onClick={handleSubmit}></button>
+    <button onClick={handleSubmit}>Aaaaaaa</button>
 	</form>
 
 
