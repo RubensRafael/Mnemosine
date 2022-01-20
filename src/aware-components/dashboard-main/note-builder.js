@@ -69,7 +69,7 @@ export default function NoteBuilder(props){
 	<form>
 
     <input type="text"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value))}}></input>
-    <textarea value={newNote.title} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></textarea>
+    <textarea value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></textarea>
     <input readOnly={newNote.never}  type="date" value={newNote.date} onChange={(e)=>{dispatch(setNoteDate(e.target.value))}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
     <input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value))}} required={true}></input>
     <input id="neve" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(e.target.value))}}></input>
