@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const today = new Date()
-const month = today.getMonth()
-const year = today.getYear()
-const tomorrow = `${today + 1}/${month === 0 ? 12 : month}/${year}`
+
 
 const initialState = {
   value: 
-    { title: '' , content: '', date: tomorrow, time: "00:00", never: true}
+    { title: '' , content: '', date: "" , time: "00:00", never: true}
   
 }
 
