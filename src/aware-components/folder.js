@@ -64,7 +64,7 @@ const StatusCounter = styled.p`
   font-weight: bold;
 	color:white;
 	border-radius: 20px;
-	width: 10%;
+	width: 20%;
 	text-align: center;
 	background-color: ${props => props.color}
 `
