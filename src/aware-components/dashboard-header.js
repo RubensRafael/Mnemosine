@@ -57,7 +57,7 @@ export default function DashboardHeader(props){
 					<EditImg onClick={()=> setNewName({name: actualFolder.name, editing: true, finish: false })} src={newName.editing ? reset : edit} alt="Edit Icon"></EditImg>
 					<Star></Star>
 					<Trash></Trash>
-					<EditImg onClick={()=>{dispatch(setCreate())}}src={plus} alt="plus"></EditImg>
+					<PlusImg onClick={()=>{dispatch(setCreate())}}src={plus} alt="plus"></PlusImg>
 				</Wrapper>
 					
 				
@@ -84,7 +84,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-	@media(max-width: 992px){
+	@media(max-width: 768px){
      flex-basis: 100%;
 	}
 
@@ -99,8 +99,12 @@ const HeaderFolderInput = styled.input`
 	border: none;
 	border: 2px solid ${ ( { editing  } ) => editing ? "#2055c0" : "gray"   };
 	outline:none;
-	font-size: 1.5rem;
+	
 	font-weight: bold;
+
+	@media(min-width: 768px){
+     font-size: 1.5rem;
+	}
 
 	
 	
@@ -112,6 +116,13 @@ const EditImg = styled.img`
 		width: 40px;
 		height: 40px;
 		cursor: pointer;
+`
+const PlusImg = styled.img`
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		position: absolute;
+    left: 90%;
 `
 
 

@@ -1,11 +1,12 @@
 import React,{ useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNoteTitle, setNoteContent, setNoteDate, setNoteTime , setNoteNever, clearNewNote } from '../../redux/new-note-slice';
 import { setView } from '../../redux/main-status-slice';
 import { useMutation } from '@apollo/client';
 import { CREATE_NOTE } from '../../querys';
 import { update } from '../../redux/side-bar-slice';
+import logo from '../../icons/logo.png';
 
 
 
@@ -16,10 +17,11 @@ export default function NoteBuilder(props){
 	const dispatch = useDispatch()
 	
 
-
+	let handleNewNoteError = (error) =>{console.log(JSON.stringify(error));setInputError(error.networkError.result.errors[0].message)}
 	let handleNoteCreated = (data) =>{dispatch(update());dispatch(setView());dispatch(clearNewNote())}
-	const [createNote, { loading, error }] = useMutation(CREATE_NOTE,{
+	const [createNote, { loading}] = useMutation(CREATE_NOTE,{
 		onCompleted : handleNoteCreated,
+		onError: handleNewNoteError
 	});
 
 	const handleSubmit = (e) =>{
@@ -29,8 +31,8 @@ export default function NoteBuilder(props){
 
     
    	if(title === '' || content === ''){
-   		setInputError("fill all the fields")
-   		console.log('conteudo')
+   		setInputError("Fill all the fields")
+   		
    	}else if(never){
        createNote({variables:{
        	title: title,
@@ -39,8 +41,8 @@ export default function NoteBuilder(props){
        	expiresIn: 'Never',
        	createdAt: String(new Date().getTime())}})
 	}else if(!(never) && (date === '' || time === '')){
-		setInputError("fill all the fields")
-		console.log('data')
+		setInputError("Fill all the fields")
+		
 	}else{  
 
      
@@ -75,23 +77,27 @@ export default function NoteBuilder(props){
 	
 	
 	return (
-	<BuilderBox>	
-	<BuilderForm onSubmit={handleSubmit}>
+	<BuilderBox>
 
-    <TitleInput type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value))}}></TitleInput>
-    <ContentInput placeholder="What do you want to remember tomorrow?"  value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></ContentInput>
+	<BuilderForm>
+	{loading ? <LoadingBox loading={loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <><BuilderTitle>Create your note here</BuilderTitle>
+
+    <TitleInput type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value));setInputError('')}}></TitleInput>
+    <ContentInput placeholder="What do you want to remember tomorrow?" rows="7" value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value));setInputError('')}}></ContentInput>
     <div>
-    	<input readOnly={newNote.never}  type="date" value={newNote.date || tomorrow} min={tomorrow} onChange={(e)=>{dispatch(setNoteDate(e.target.value))}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
-    	<input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value))}} required={true}></input>
+    	<p>When should the note expire?</p>
+    	<input readOnly={newNote.never}  type="date" value={newNote.date || tomorrow} min={tomorrow} onChange={(e)=>{dispatch(setNoteDate(e.target.value));setInputError('')}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
+    	<input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value));setInputError('')}} required={true}></input>
 	</div>
 	<div>    
-    	<input id="never" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(!(newNote.never)))}}></input>
+    	<input id="never" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(!(newNote.never)));setInputError('')}}></input>
 		<label htmlFor="never"  >Never expires.</label>
 	</div>
-    <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>
+	<BuilderError error={inputError}>{inputError || 'wrapper'}</BuilderError>
+    <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton></>}
     
 	</BuilderForm>
-	<div>{inputError}</div>
+	
 	</BuilderBox>
 
 
@@ -113,6 +119,10 @@ const BuilderForm = styled.form`
     width: 60%;
     background-color: white;
 
+`
+const BuilderTitle = styled.h3`
+	
+	text-align: center;
 
 `
 
@@ -120,13 +130,24 @@ const TitleInput = styled.input`
 	background-color: white;
 	border: none;
 	border-bottom: 2px solid #2055c0;
+	outline: none;
 	
 
 `
 
 const ContentInput = styled.textarea`
 	background-color: white;
-	border: 2px solid #2055c0 ;
+	border: 2px solid #2055c0;
+	outline: none;
+	padding : 2px;
+
+`
+
+const BuilderError = styled.p`
+	color: red;
+	transition : .2s;
+	text-align: center;
+	visibility: ${props => props.error ? "visible" : "hidden"};
 
 `
 const SaveButton = styled.div`
@@ -134,15 +155,50 @@ const SaveButton = styled.div`
 	border: #2055c0 solid 2px;
 	color : white;
 	transition : .2s;
+	text-align: center;
+	cursor: pointer;
 
 	&:hover{
-		background-color : none;
+		background-color: transparent;
+    	color: #2055c0;
 	}
     
 	&:active{
-		border:none ;
+		border-color: transparent;
+    	background-color: transparent;
+    	color: #2055c0;
 	}
 
+`
 
+const LoadingImg = styled.img`
+	width: 60px;
+	height: 60px;
+`
 
+const NewFolderLoading = keyframes`
+  0%{
+      left: 40%;
+  }
+  100%{
+      left: 50%;
+  }
+`
+const LoadingBox = styled.div`
+  position : ${props => props.loading ? "relative" : ""};
+  text-align: center;
+  
+${({ loading }) => loading &&
+    css`
+      &:before {
+       margin-top: 2px;
+	     content: "";
+	     width: 10%;
+	     top: 100%;
+	     left: 45%;
+	     position: absolute;
+	     border-bottom: 2px #2055c0 solid;
+	     animation: ${NewFolderLoading} infinite alternate 0.5s;
+      }
+`}
 `
