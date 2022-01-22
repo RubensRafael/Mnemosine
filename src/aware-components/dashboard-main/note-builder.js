@@ -78,8 +78,8 @@ export default function NoteBuilder(props){
 	<BuilderBox>	
 	<BuilderForm onSubmit={handleSubmit}>
 
-    <TitleInput type="text" placeHolder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value))}}></TitleInput>
-    <ContentInput placeHolder="What do you want to remember tomorrow?"  value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></ContentInput>
+    <TitleInput type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value))}}></TitleInput>
+    <ContentInput placeholder="What do you want to remember tomorrow?"  value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value))}}></ContentInput>
     <div>
     	<input readOnly={newNote.never}  type="date" value={newNote.date || tomorrow} min={tomorrow} onChange={(e)=>{dispatch(setNoteDate(e.target.value))}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
     	<input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value))}} required={true}></input>
@@ -88,7 +88,7 @@ export default function NoteBuilder(props){
     	<input id="never" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(!(newNote.never)))}}></input>
 		<label htmlFor="never"  >Never expires.</label>
 	</div>
-    <button onClick={handleSubmit}>SAVE</button>
+    <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>
     
 	</BuilderForm>
 	<div>{inputError}</div>
@@ -129,7 +129,20 @@ const ContentInput = styled.textarea`
 	border: 2px solid #2055c0 ;
 
 `
-const Titlput = styled.input`
-	
+const SaveButton = styled.div`
+	background-color : #2055c0;
+	border: #2055c0 solid 2px;
+	color : white;
+	transition : .2s;
+
+	&:hover{
+		background-color : none;
+	}
+    
+	&:active{
+		border:none ;
+	}
+
+
 
 `
