@@ -75,3 +75,29 @@ export const CREATE_NOTE = gql`
 	}
 
 `
+
+export const TO_COMPLETE_NOTE = gql`
+
+	mutation($noteId: String!,$complete: Boolean!, $modifiedAt: String!){
+	 	updateNote(noteId: $noteId,complete: $complete, modifiedAt: $modifiedAt){
+	 		_id,
+	 	 	title
+	 	 }
+	 }
+`
+
+export const LIST_NOTES = gql`
+	query($folder_id: String!){
+			getUser{
+				mainOrActualFolder(folderId:$folder_id){
+      				notes{
+      					_id
+						title,
+						content,
+						completed
+      				}
+				}
+					
+			}
+	}
+`

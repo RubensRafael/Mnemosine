@@ -14,7 +14,7 @@ import load from '../icons/loading.svg';
 export default function SideBar(props){
 	const dispatch = useDispatch()
 	const { loading, error, data, refetch} = useQuery(FOLDER_LIST,{
-		fetchPolicy:'network-only',
+		fetchPolicy:'no-cache',
 		notifyOnNetworkStatusChange: true,
 	})
 	

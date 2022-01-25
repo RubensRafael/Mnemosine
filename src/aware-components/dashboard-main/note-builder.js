@@ -94,7 +94,9 @@ export default function NoteBuilder(props){
 		<label htmlFor="never"  >Never expires.</label>
 	</div>
 	<BuilderError error={inputError}>{inputError || 'wrapper'}</BuilderError>
-    <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton></>}
+    <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>
+    <CancelButton role="button" onClick={()=>{dispatch(setView())}}>Cancel</CancelButton>
+    </>}
     
 	</BuilderForm>
 	
@@ -167,6 +169,26 @@ const SaveButton = styled.div`
 		border-color: transparent;
     	background-color: transparent;
     	color: #2055c0;
+	}
+
+`
+const CancelButton = styled.div`
+	background-color : white;
+	border: red solid 2px;
+	color : red;
+	transition : .2s;
+	text-align: center;
+	cursor: pointer;
+
+	&:hover{
+			background-color: red;
+    	color: white;
+	}
+    
+	&:active{
+			border-color: transparent;
+    	background-color: transparent;
+    	color: red;
 	}
 
 `
