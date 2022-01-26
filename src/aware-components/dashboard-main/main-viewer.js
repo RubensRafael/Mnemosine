@@ -36,9 +36,11 @@ return (
 }
 const Viewer = styled.main`
 
-	display:flex;
-	overflow: auto;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	 display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    justify-content: space-around;
+    background-color: white;
+    padding: 10px;
 
 `

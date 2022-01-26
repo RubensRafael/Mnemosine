@@ -38,9 +38,6 @@ const DashboardBox = styled.main`
 	grid-template-columns : 100% ;
 	grid-template-rows: 15vh 60vh 15vh;
 }
-@media (max-height: 800px) {
-	grid-template-columns : 100% ;
-	grid-template-rows: 10vh 70vh 10vh;
-}
+
 	
 `
