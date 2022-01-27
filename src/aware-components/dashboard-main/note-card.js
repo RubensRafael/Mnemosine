@@ -41,10 +41,9 @@ export default function Card({ note }){
 	   </CardHeader>
 	{
 	   showConfig ? 
-	   <CardBody>
+	   <CardBody config={showConfig}>
 	        { moveNote ? <div>move</div> : <img alt="pasta" onClick={toggleMoveNote} src={trash} ></img>}
 	        { trashing ? <div>trash</div>: <img alt="lixo" onClick={toggleTrash} src={trash}></img>}
-	        
 
 	   </CardBody>
 	:
@@ -86,7 +85,7 @@ const CardHeader = styled.div`
 const CardBody = styled.div`
 	
     display: flex;
-    flex-direction: column;
+    flex-direction: ${({config})=> config ? 'row' : 'column'};
     height: 80%;
     width: 100%;
     justify-content:space-between;
@@ -99,6 +98,7 @@ const CardContent = styled.div`
     text-overflow: ellipsis;
 	border-top : #2055c0 solid 1px;
 	border-bottom : #2055c0 solid 1px;
+	height : 80%;
 
 	&:hover{
 		background-color : rgba(112,112,112,0.5);
@@ -112,6 +112,7 @@ const CardTitle = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
 	white-space: nowrap;
+	height : 20%;
 
 
 `
