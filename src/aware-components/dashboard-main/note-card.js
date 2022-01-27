@@ -97,13 +97,18 @@ const CardContent = styled.div`
 	
     overflow: hidden;
     text-overflow: ellipsis;
+	border-top : #2055c0 solid 1px;
+	border-bottom : #2055c0 solid 1px;
 
+	&:hover{
+		background-color : rgba(112,112,112,0.5);
+	}
 
 `
 
 const CardTitle = styled.div`
 	
-	border-top: #2055c0 solid 1px;
+	background-color : rgba(112,112,112,0.5);
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -113,6 +118,13 @@ const CardTitle = styled.div`
 const CheckButton  = styled.img`
 	
 	cursor: pointer;
+
+	&:hover{
+		background-color : rgba(112,112,112,0.5);
+	}
+	&:active{
+		background-color : rgba(112,112,112,0.5);
+	}
 
 
 `
