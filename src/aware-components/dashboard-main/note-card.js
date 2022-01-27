@@ -8,7 +8,7 @@ import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
 import config from '../../icons/config.svg';
 import back  from  '../../icons/back.svg';
-//const back = '../icons/reset.svg';
+const trash  = '../icons/reset.svg';
 
 
 //<MoveNoteFolderList back={toggleMoveNote} ></MoveNoteFolderList>
