@@ -7,8 +7,8 @@ import { update } from '../../redux/side-bar-slice';
 import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
 import config from '../../icons/config.svg';
-const trash = '../../icons/trash.svg';
-const back = '../icons/reset.svg';
+import back  from  '../../icons/back.svg';
+//const back = '../icons/reset.svg';
 
 
 //<MoveNoteFolderList back={toggleMoveNote} ></MoveNoteFolderList>
@@ -111,6 +111,7 @@ const CardTitle = styled.div`
 	background-color : rgba(112,112,112,0.5);
     overflow: hidden;
     text-overflow: ellipsis;
+	white-space: nowrap;
 
 
 `
