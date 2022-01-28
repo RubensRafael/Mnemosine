@@ -22,14 +22,16 @@ export default function Card({ note }){
 	const [ moveNote ,setMoveNote ] = useState(false)
 	const [isComplete, setIsComplete] = useState(false)
 
-	const handleToggleComplete = () => {console.log("aol");setIsComplete(!(isComplete));dispatch(update())}
+	let handlerToggleComplete = () => {setIsComplete(!(isComplete));dispatch(update())}
 	const [toggleComplete, {loading, error, data}] = useMutation(TO_COMPLETE_NOTE,{
-	    onComplete: handleToggleComplete
+	    onCompleted: handlerToggleComplete
 	})
 
 	useEffect(()=>{
 		if(note.completed){setIsComplete(true)}
 	},[])
+
+
 
 	const toggleTrash = () => setTrashing(!(trashing))
 	const toggleMoveNote = () => setMoveNote(!(moveNote))
@@ -37,13 +39,13 @@ export default function Card({ note }){
 	return(
 	<CardBox>
 	   <CardHeader>
-	      <CheckButton alt="check" onClick={()=>{if(!(loading)){toggleComplete({variables:{complete:!(isComplete),noteId:note._id,modifiedAt:String(new Date().getTime())}})}}} src={isComplete ? checked : uncheck}></CheckButton>
-	      <img alt="config" onClick={()=>{ setShowConfig(!(showConfig)) }} src={showConfig ? back : config} ></img>
+	      <DefaultButton alt="check" onClick={()=>{if(!(loading)){toggleComplete({variables:{complete:!(isComplete),noteId:note._id,modifiedAt:String(new Date().getTime())}})}}} src={isComplete ? checked : uncheck}></DefaultButton>
+	      <DefaultButton alt="config" onClick={()=>{ setShowConfig(!(showConfig)) }} src={showConfig ? back : config} ></DefaultButton>
 	   </CardHeader>
 	{
 	   showConfig ? 
 	   <CardBody config={showConfig}>
-	        { moveNote ? <div>move</div> : <img alt="pasta" onClick={toggleMoveNote} src={folderIcon} ></img>}
+	        { moveNote ? <div>move</div> : <DefaultButton alt="pasta" onClick={toggleMoveNote} src={folderIcon} ></DefaultButton >}
 	        { trashing ? <div>trash</div>: <TrashIcon  alt="lixo" onClick={toggleTrash} src={trash}></TrashIcon>}
 
 	   </CardBody>
@@ -77,7 +79,7 @@ const CardHeader = styled.div`
     display: flex;
 	width: 100%;
     height: 20%;
-    
+    border-bottom : #2055c0 solid 1px;
     
     justify-content: space-between;
     
@@ -99,7 +101,7 @@ const CardContent = styled.div`
 	
     overflow: hidden;
     text-overflow: ellipsis;
-	border-top : #2055c0 solid 1px;
+	cursor: pointer;
 	border-bottom : #2055c0 solid 1px;
 	height : 80%;
 
@@ -110,7 +112,7 @@ const CardContent = styled.div`
 `
 
 const CardTitle = styled.div`
-	
+	cursor: pointer;
 	background-color : rgba(112,112,112,0.5);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -120,23 +122,17 @@ const CardTitle = styled.div`
 
 `
 
-const CheckButton  = styled.img`
+const DefaultButton  = styled.img`
 	
 	cursor: pointer;
-
-	&:hover{
-		background-color : rgba(112,112,112,0.5);
-	}
-	&:active{
-		background-color : rgba(112,112,112,0.5);
-	}
 
 
 `
 
-const TrashIcon = styled.img`
 
-   width : 20px;
-   height : 20px;
+const TrashIcon = styled.img`
+   cursor: pointer;
+   width : 40px;
+   height : 40px;
 
 `
