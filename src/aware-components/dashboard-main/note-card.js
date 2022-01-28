@@ -8,7 +8,8 @@ import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
 import config from '../../icons/config.svg';
 import back  from  '../../icons/back.svg';
-const trash  = '../icons/reset.svg';
+import trash  from  '../../icons/trash.svg';
+import folderIcon from "../../icons/change-folder.svg"
 
 
 //<MoveNoteFolderList back={toggleMoveNote} ></MoveNoteFolderList>
@@ -42,8 +43,8 @@ export default function Card({ note }){
 	{
 	   showConfig ? 
 	   <CardBody config={showConfig}>
-	        { moveNote ? <div>move</div> : <img alt="pasta" onClick={toggleMoveNote} src={trash} ></img>}
-	        { trashing ? <div>trash</div>: <img alt="lixo" onClick={toggleTrash} src={trash}></img>}
+	        { moveNote ? <div>move</div> : <img alt="pasta" onClick={toggleMoveNote} src={folderIcon} ></img>}
+	        { trashing ? <div>trash</div>: <TrashIcon  alt="lixo" onClick={toggleTrash} src={trash}></TrashIcon>}
 
 	   </CardBody>
 	:
@@ -130,5 +131,12 @@ const CheckButton  = styled.img`
 		background-color : rgba(112,112,112,0.5);
 	}
 
+
+`
+
+const TrashIcon = styled.img`
+
+   width : 16px;
+   height : 16px;
 
 `
