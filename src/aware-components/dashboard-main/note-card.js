@@ -86,6 +86,8 @@ const CardBody = styled.div`
 	
     display: flex;
     flex-direction: ${({config})=> config ? 'row' : 'column'};
+	align-items : ${({config})=> config ? 'center' : ''};
+	justify-content : ${({config})=> config ? 'space-around' : 'space-between'};
     height: 80%;
     width: 100%;
     justify-content:space-between;
