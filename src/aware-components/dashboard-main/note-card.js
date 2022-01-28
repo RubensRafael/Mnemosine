@@ -91,7 +91,7 @@ const CardBody = styled.div`
 	justify-content : ${({config})=> config ? 'space-around' : 'space-between'};
     height: 80%;
     width: 100%;
-    justify-content:space-between;
+    
 
 `
 
@@ -136,7 +136,7 @@ const CheckButton  = styled.img`
 
 const TrashIcon = styled.img`
 
-   width : 16px;
-   height : 16px;
+   width : 20px;
+   height : 20px;
 
 `
