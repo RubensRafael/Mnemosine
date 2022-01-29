@@ -5,6 +5,7 @@ import { FOLDER_LIST } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
 import {setMainFolder} from '../redux/userinfo-slice';
+import {setFolderList} from '../redux/folder-list-slice';
 import { useQuery } from '@apollo/client';
 import styled, {keyframes} from 'styled-components';
 import load from '../icons/loading.svg';
@@ -13,7 +14,9 @@ import load from '../icons/loading.svg';
 
 export default function SideBar(props){
 	const dispatch = useDispatch()
+	const upFolderList = (data) => dispatch(setFolderList(data.getUser.folderList))
 	const { loading, error, data, refetch} = useQuery(FOLDER_LIST,{
+		onCompleted: upFolderList,
 		fetchPolicy:'no-cache',
 		notifyOnNetworkStatusChange: true,
 	})

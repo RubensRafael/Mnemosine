@@ -4,6 +4,7 @@ import actualfolderSlice from './actual-folder';
 import userinfoSlice from './userinfo-slice';
 import newNoteSlice from './new-note-slice';
 import mainStatusSlice from './main-status-slice';
+import folderlistSlice from './folder-list-slice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     userinfo: userinfoSlice,
     newnote: newNoteSlice,
     mainstatus: mainStatusSlice,
+    folderlist: folderlistSlice
   },
   devTools: process.env.NODE_ENV !== 'production',
 })

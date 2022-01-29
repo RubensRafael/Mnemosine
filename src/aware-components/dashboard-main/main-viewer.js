@@ -19,12 +19,12 @@ export default function MainViewer(props){
 	let noteList = [];
 	if(data){
 		
-		noteList = data.getUser.mainOrActualFolder.notes
+		noteList = JSON.parse(JSON.stringify(data.getUser.mainOrActualFolder.notes))
 	}
 return (
 	<Viewer>
     {
-       loading ? '' : noteList.map((note)=><Card key={note._id} note={note}></Card>)
+       loading ? '' : noteList.reverse().map((note)=><Card key={note._id} note={note}></Card>)
 
     }
 	</Viewer>
@@ -42,5 +42,6 @@ const Viewer = styled.main`
     justify-content: space-around;
     background-color: white;
     padding: 10px;
+    transition : .2s;
 
 `

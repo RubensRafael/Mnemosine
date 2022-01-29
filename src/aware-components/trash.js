@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import { useMutation  } from '@apollo/client';
-import { REMOVE_FOLDER  } from '../querys';
+import { REMOVE_ITEM  } from '../querys';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from '../redux/actual-folder';
 import { update } from '../redux/side-bar-slice';
 import trash from '../icons/trash.svg';
+import load from '../icons/loading.svg';
 
 export default function Trash(props){
     
@@ -14,7 +15,7 @@ export default function Trash(props){
 	const dispatch = useDispatch()
 	
 	const handleRemove = () =>{dispatch(change(''));dispatch(update());setWarn(false)}
-	const [removeFolder , { loading }] = useMutation(REMOVE_FOLDER,{
+	const [removeFolder , { loading }] = useMutation(REMOVE_ITEM,{
 		onCompleted : handleRemove,
 	});
 
@@ -33,10 +34,10 @@ export default function Trash(props){
 							    </ul>
 							    <span style={{color: "red"}}>You cannot remove your main folder.</span>
 							    <TrashChoose>
-								    <TrashConfirm  onClick={ () => {if(!(actualFolder.isMain)){removeFolder({variables:{folderId: actualFolder._id}})}}}>Confirm</TrashConfirm>
+								    <TrashConfirm  onClick={ () => {if(!(actualFolder.isMain)){removeFolder({variables:{targetId: actualFolder._id,level:2}})}}}>Confirm</TrashConfirm>
 								    <TrashCancel onClick={ () => setWarn(false) }>Cancel</TrashCancel>
 							    </TrashChoose>
-							</>: <div>CARREGANDO</div>}
+							</>: <LoadIcon src={load}></LoadIcon> }
 						</TrashWarn>
 				</TrashPopUp> : <TrashIcon src={trash} onClick={ () =>{setWarn(true)} }></TrashIcon>}
 			
@@ -92,7 +93,7 @@ const TrashChoose = styled.div`
 
 const TrashButton = styled.div`
      
-    height : 30px;
+    height : 40px;
 	width : 100%;
 	text-align: center;
 	cursor: pointer;
@@ -138,4 +139,28 @@ const TrashLi = styled.li`
 
 const TrashP = styled.p`
     text-align: center;
+`
+const Loading = keyframes`
+  0%{
+      transform : rotate(0deg)
+  }
+  25%{
+      transform : rotate(90deg)
+  }
+  50%{
+  	  transform : rotate(180deg)
+  }
+  75%{
+  	  transform : rotate(270deg)
+  }
+  100%{
+  	  transform : rotate(360deg)
+  }
+`
+const LoadIcon = styled.img`
+	width : 40px;
+  	height : 40px;
+	
+	animation: ${Loading} infinite 0.5s;
+	
 `

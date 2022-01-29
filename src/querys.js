@@ -38,14 +38,17 @@ export const CHANGE_FOLDER_TOMAIN = gql`
 
 `
 
-export const REMOVE_FOLDER = gql`
+export const REMOVE_ITEM = gql`
     
-    mutation($folderId: String!){
-		deleteTarget(level: 2, targetId: $folderId)
+    mutation($targetId: String!, $level: Int!){
+		deleteTarget(level: $level, targetId: $targetId)
 	}
     
 
 `
+
+
+
 
 
 
