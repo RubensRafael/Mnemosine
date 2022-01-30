@@ -109,7 +109,7 @@ function CardMove(props){
 			<TrashWarn islist={true}>
 			<div style={{width: "100%"}} ><img onClick={props.back} src={back}></img></div>
 			<h3 style={{borderBottom: "#2055c0 solid 2px",width: "100%", textAlign: "center"}}>Choose the folder to replace the note</h3>
-				{ loading  ? <> {copyList.reverse().filter((folder)=>folder !== actualFolder).map((folder)=>{return(<FolderOption onClick={()=>changeNoteFolder({variables : {noteId:props.note._id,from:actualFolder._id,to:folder._id,modifiedAt:String(new Date().getTime())}})} >{folder.name}</FolderOption>)})}
+				{ !(loading)  ? <> {copyList.reverse().filter((folder)=>folder !== actualFolder).map((folder)=>{return(<FolderOption onClick={()=>changeNoteFolder({variables : {noteId:props.note._id,from:actualFolder._id,to:folder._id,modifiedAt:String(new Date().getTime())}})} >{folder.name}</FolderOption>)})}
 					
 					</>: <LoadIcon src={load}></LoadIcon> }
 			</TrashWarn>
