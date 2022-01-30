@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import styled, {keyframes} from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMutation} from '@apollo/client';
-import { TO_COMPLETE_NOTE, REMOVE_ITEM } from '../../querys';
+import { TO_COMPLETE_NOTE, REMOVE_ITEM, CHANGE_NOTE_FOLDER } from '../../querys';
 import { update } from '../../redux/side-bar-slice';
 import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
@@ -25,10 +25,10 @@ export default function Card({ note }){
 	const [removedNote, setRemovedNote] = useState(false)
 
 
-	let handlerToggleComplete = () => {setIsComplete(!(isComplete));dispatch(update())}
+	let handleToggleComplete = () => {setIsComplete(!(isComplete));dispatch(update())}
 	const [toggleComplete, {loading, error, data}] = useMutation(TO_COMPLETE_NOTE,{
 		fetchPolicy:'no-cache',
-	    onCompleted: handlerToggleComplete
+	    onCompleted: handleToggleComplete
 	})
 
 
@@ -54,7 +54,7 @@ export default function Card({ note }){
 	{
 	   showConfig ? 
 	   <CardBody config={showConfig}>
-	        { moveNote ? <CardMove back={toggleMoveNote} ></CardMove>: <DefaultButton alt="pasta" onClick={toggleMoveNote} src={folderIcon} ></DefaultButton >}
+	        { moveNote ? <CardMove note={note} back={toggleMoveNote} ></CardMove>: <DefaultButton alt="pasta" onClick={toggleMoveNote} src={folderIcon} ></DefaultButton >}
 	        { trashing ? <CardTrash trashBack={toggleTrash} noteDisappear={makeNoteDisappear} note={note} ></CardTrash>: <TrashIcon  alt="lixo" onClick={toggleTrash} src={trash}></TrashIcon>}
 
 	   </CardBody>
@@ -73,7 +73,7 @@ export default function Card({ note }){
 
 function CardTrash(props){
 	const dispatch = useDispatch()
-	let handleRemovedNote = () => {dispatch(update());props.trashBack(false);props.noteDisappear(true)}
+	let handleRemovedNote = () => {dispatch(update());props.trashBack();props.noteDisappear()}
 	const [removeNote, removeNoteResponse] = useMutation(REMOVE_ITEM,{
 	    onCompleted: handleRemovedNote
 	})
@@ -95,13 +95,21 @@ function CardTrash(props){
 }
 
 function CardMove(props){
+
+	const dispatch = useDispatch()
+	let handleChangeComplete = () => {dispatch(update());props.back();props.noteDisappear()}
+	const [changeNoteFolder, {loading, error, data}] = useMutation(CHANGE_NOTE_FOLDER,{
+		fetchPolicy:'no-cache',
+	    onCompleted: handleChangeComplete
+	})
 	const folderList = useSelector((state)=>state.folderlist.value)
+	const actualFolder = useSelector((state)=>state.actualfolder.value)
 	const copyList = JSON.parse(JSON.stringify(folderList))
 	return(<TrashPopUp>
 			<TrashWarn islist={true}>
 			<div style={{width: "100%"}} ><img onClick={props.back} src={back}></img></div>
 			<h3 style={{borderBottom: "#2055c0 solid 2px",width: "100%", textAlign: "center"}}>Choose the folder to replace the note</h3>
-				{ true ? <> {copyList.reverse().map((folder)=>{return(<FolderOption>{folder.name}</FolderOption>)})}
+				{ loading  ? <> {copyList.reverse().filter((folder)=>folder !== actualFolder).map((folder)=>{return(<FolderOption onClick={()=>changeNoteFolder({variables : {noteId:props.note._id,from:actualFolder._id,to:folder._id,modifiedAt:String(new Date().getTime())}})} >{folder.name}</FolderOption>)})}
 					
 					</>: <LoadIcon src={load}></LoadIcon> }
 			</TrashWarn>

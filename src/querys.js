@@ -104,3 +104,12 @@ export const LIST_NOTES = gql`
 			}
 	}
 `
+
+export const CHANGE_NOTE_FOLDER = gql`
+	mutation($noteId: String!,$from: String!, $to:String! , $modifiedAt: String!){
+	 	updateNote(noteId: $noteId,fromFolder: $from, toFolder: $to ,modifiedAt: $modifiedAt){
+	 		_id,
+	 	 	title
+	 	 }
+	 }
+`
