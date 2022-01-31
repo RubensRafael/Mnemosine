@@ -70,8 +70,8 @@ export default function NoteBuilder(props){
 }
 	const today = new Date()
 	const day = today.getDate() + 1
-	const month = today.getMonth()
-	const year = today.getFullYear()
+	const month = day === 32 ? today.getMonth() + 1 : today.getMouth()
+	const year = day === 32 && month === 12 ? today.getFullYear() + 1 : today.getYear()
 	const tomorrow = `${year}-${month === 0 ? 12 : month}-${day === 32 ? 01 : day}`
 
 	
