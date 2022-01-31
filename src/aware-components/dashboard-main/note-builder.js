@@ -69,7 +69,7 @@ export default function NoteBuilder(props){
 
 }
 	const today = new Date()
-	today.setDate(currentDate.getDate() + 1);
+	today.setDate(today.getDate() + 1);
 	const day = today.getDate()
 	const month = today.getMonth() + 1
 	const year = today.getFullYear()
