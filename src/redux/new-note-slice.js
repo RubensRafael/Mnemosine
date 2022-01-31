@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-
+let today = new Date()
+today.setDate(today.getDate() + 1);
+let day = String(today.getDate())
+let month = String(today.getMonth() + 1)
+let year = String(today.getFullYear())
+let tomorrow = `${year}-${month.length === 1 ? "0" + month : month}-${day.length === 1 ? "0" + day : day}`
 
 const initialState = {
   value: 
-    { title: '' , content: '', date: "" , time: "00:00", never: true}
+    { title: '' , content: '', date: tomorrow , time: "00:00", never: true}
   
 }
 

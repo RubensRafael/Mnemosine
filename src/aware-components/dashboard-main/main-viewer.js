@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useEffect} from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { LIST_NOTES } from '../../querys';
@@ -8,12 +8,16 @@ import Card from './note-card'
 
 export default function MainViewer(props){
 	const actualFolder = useSelector((state)=>state.actualfolder.value)
+	const update = useSelector((state) => state.sidebarupdate.value)
 	let folderCopy = JSON.parse(JSON.stringify(actualFolder))
-	const [forcedLoad, setForcedLoad] = useState(false)
-	const {loading, error, data} = useQuery(LIST_NOTES, {variables:{
+	
+	const {loading, data, refetch} = useQuery(LIST_NOTES, {variables:{
    		folder_id: folderCopy._id,
+   		notifyOnNetworkStatusChange: true,
    		fetchPolicy: "no-cache"
 	}})
+	//eslint-disable-next-line
+	useEffect(()=>{refetch()},[update])
 	
 	
 	let noteList = [];

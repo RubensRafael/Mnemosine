@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useMutation} from '@apollo/client';
 import { TO_COMPLETE_NOTE, REMOVE_ITEM, CHANGE_NOTE_FOLDER } from '../../querys';
 import { update } from '../../redux/side-bar-slice';
+import { setDetail } from '../../redux/main-status-slice';
 import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
 import config from '../../icons/config.svg';
@@ -26,7 +27,7 @@ export default function Card({ note }){
 
 
 	let handleToggleComplete = () => {setIsComplete(!(isComplete));dispatch(update())}
-	const [toggleComplete, {loading, error, data}] = useMutation(TO_COMPLETE_NOTE,{
+	const [toggleComplete, {loading}] = useMutation(TO_COMPLETE_NOTE,{
 		fetchPolicy:'no-cache',
 	    onCompleted: handleToggleComplete
 	})
@@ -36,6 +37,7 @@ export default function Card({ note }){
 
 	useEffect(()=>{
 		if(note.completed){setIsComplete(true)}
+			//eslint-disable-next-line
 	},[])
 
 
@@ -59,7 +61,7 @@ export default function Card({ note }){
 
 	   </CardBody>
 	:
-	<CardBody onClick={()=>{console.log("MOSTRA OS DETALHES AGORA")}}>
+	<CardBody onClick={()=>{dispatch(setDetail(note))}}>
 	   <CardContent>{note.content}</CardContent>
 	   <CardTitle>{note.title}</CardTitle>
 	</CardBody>
@@ -67,7 +69,7 @@ export default function Card({ note }){
 	</CardBox> : '' }</>
   )
 
-	//dispatch(setDetail(note))}
+	
 	
 }
 
@@ -98,7 +100,7 @@ function CardMove(props){
 
 	const dispatch = useDispatch()
 	let handleChangeComplete = () => {dispatch(update());props.back();props.noteDisappear()}
-	const [changeNoteFolder, {loading, error, data}] = useMutation(CHANGE_NOTE_FOLDER,{
+	const [changeNoteFolder, {loading}] = useMutation(CHANGE_NOTE_FOLDER,{
 		fetchPolicy:'no-cache',
 	    onCompleted: handleChangeComplete
 	})
@@ -107,7 +109,7 @@ function CardMove(props){
 	const copyList = JSON.parse(JSON.stringify(folderList))
 	return(<TrashPopUp>
 			<TrashWarn islist={true}>
-			<div style={{width: "100%"}} ><img onClick={props.back} src={back}></img></div>
+			<div style={{width: "100%"}} ><img alt="back" onClick={props.back} src={back}></img></div>
 			<h3 style={{borderBottom: "#2055c0 solid 2px",width: "100%", textAlign: "center"}}>Choose the folder to replace the note</h3>
 				{ !(loading)  ? <> {copyList.reverse().filter((folder)=>folder._id  !== actualFolder._id).map((folder)=>{return(<FolderOption onClick={()=>changeNoteFolder({variables : {noteId:props.note._id,from:actualFolder._id,to:folder._id,modifiedAt:String(new Date().getTime())}})} >{folder.name}</FolderOption>)})}
 					

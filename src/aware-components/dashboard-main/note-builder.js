@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_NOTE } from '../../querys';
 import { update } from '../../redux/side-bar-slice';
 import logo from '../../icons/logo.png';
+import back from '../../icons/back.svg';
 
 
 
@@ -68,12 +69,7 @@ export default function NoteBuilder(props){
     }
 
 }
-	const today = new Date()
-	today.setDate(today.getDate() + 1);
-	const day = today.getDate()
-	const month = today.getMonth() + 1
-	const year = today.getFullYear()
-	const tomorrow = `${year}-${month === 13 ? 1 : month}-${day}`
+	
 
 	
 	
@@ -81,13 +77,15 @@ export default function NoteBuilder(props){
 	<BuilderBox>
 
 	<BuilderForm>
-	{loading ? <LoadingBox loading={loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <><BuilderTitle>Create your note here</BuilderTitle>
+	{loading ? <LoadingBox isLoading={loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <>
+	<div style={{width: "100%"}} ><CancelButton onClick={()=>{dispatch(setView())}} src={back}></CancelButton></div>
+	<BuilderTitle>Create your note here</BuilderTitle>
 
     <TitleInput type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value));setInputError('')}}></TitleInput>
     <ContentInput placeholder="What do you want to remember tomorrow?" rows="7" value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value));setInputError('')}}></ContentInput>
     <div>
     	<p>When should the note expire?</p>
-    	<input readOnly={newNote.never}  type="date" value={newNote.date || tomorrow} min={tomorrow} onChange={(e)=>{dispatch(setNoteDate(e.target.value));setInputError('')}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
+    	<input readOnly={newNote.never}  type="date" value={newNote.date} min={newNote.date} onChange={(e)=>{dispatch(setNoteDate(e.target.value));setInputError('')}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
     	<input readOnly={newNote.never}  type="time" value={newNote.time} onChange={(e)=>{dispatch(setNoteTime(e.target.value));setInputError('')}} required={true}></input>
 	</div>
 	<div>    
@@ -96,7 +94,7 @@ export default function NoteBuilder(props){
 	</div>
 	<BuilderError error={inputError}>{inputError || 'wrapper'}</BuilderError>
     <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>
-    <CancelButton role="button" onClick={()=>{dispatch(setView())}}>Cancel</CancelButton>
+   
     </>}
     
 	</BuilderForm>
@@ -173,25 +171,11 @@ const SaveButton = styled.div`
 	}
 
 `
-const CancelButton = styled.div`
-	background-color : white;
-	border: red solid 2px;
-	color : red;
-	transition : .2s;
-	text-align: center;
+const CancelButton = styled.img`
+	
 	cursor: pointer;
 
-	&:hover{
-			background-color: red;
-    	color: white;
-	}
-    
-	&:active{
-			border-color: transparent;
-    	background-color: transparent;
-    	color: red;
-	}
-
+	
 `
 
 const LoadingImg = styled.img`
@@ -208,7 +192,7 @@ const NewFolderLoading = keyframes`
   }
 `
 const LoadingBox = styled.div`
-  position : ${props => props.loading ? "relative" : ""};
+  position : ${props => props.isLoading ? "relative" : ""};
   text-align: center;
   
 ${({ loading }) => loading &&

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: 'view',
+  value: ['view'],
 }
 
 export const mainStatusSlice = createSlice({
@@ -9,15 +9,18 @@ export const mainStatusSlice = createSlice({
   initialState,
   reducers: {
     setView: (state,action) => {
-      state.value = 'view'
+      state.value = ['view']
     },
     setCreate: (state,action) => {
-      state.value = 'create'
+      state.value = ['create']
+    },
+    setDetail: (state,action) => {
+      state.value = ['detail',action.payload]
     },
   }, 
 })
 
 // Action creators are generated for each case reducer function
-export const { setView, setCreate } = mainStatusSlice.actions
+export const { setView, setCreate, setDetail } = mainStatusSlice.actions
 
 export default mainStatusSlice.reducer
