@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled,{css, keyframes} from 'styled-components';
 import back from '../../icons/back.svg';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,24 +9,31 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function NoteDetail(props){
 
 	const notePayload = useSelector((state)=>state.mainstatus.value)
-	let note = JSON.parse(JSON.stringify(notePayload[1]))
+	let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
 	
+	const [noteId, setNoteId] = useState(noteCopy._id)
+    const [noteTitle,setNoteTitle ] = useState(noteCopy.title)
+	const [noteContent , setNoteContent ] = useState(noteCopy.content)
+	const [noteComplete, setNoteComplete] = useState(noteCopy.completed)
+
+	// expiresIn, created at, modified at 
+
 	return(<BuilderBox>
 	
 		<BuilderForm>
 		{false ? <LoadingBox><LoadingImg></LoadingImg></LoadingBox>  : <>
 		<div style={{width: "100%"}} ><CancelButton src={back}></CancelButton></div>
-		<BuilderTitle>{note.title}</BuilderTitle>
+		<BuilderTitle>{noteTitle}</BuilderTitle>
 	
-	    <TitleInput value={note.title} type="text" placeholder="Input the title here" ></TitleInput>
-	    <ContentInput value={note.content} placeholder="What do you want to remember tomorrow?" rows="7" ></ContentInput>
+	    <TitleInput value={noteTitle} onChange={(e)=>setNoteTitle(e.target.value)} type="text" placeholder="Input the title here" ></TitleInput>
+	    <ContentInput value={noteContent} onChange={(e)=> setNoteContent(e.target.value)} placeholder="What do you want to remember tomorrow?" rows="7" ></ContentInput>
 	    <div>
 	    	<p>When should the note expire?</p>
 	    	<input type="date" required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
 	    	<input type="time" required={true}></input>
 		</div>
 		<div>    
-	    	<input id="never" type="checkbox" ></input>
+	    	<input checked={noteComplete} onChange={()=>setNoteComplete(!(noteComplete))} id="never" type="checkbox" ></input>
 			<label htmlFor="never">Never expires.</label>
 		</div>
 		<BuilderError error={false}>{'' || 'wrapper'}</BuilderError>
