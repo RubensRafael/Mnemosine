@@ -17,6 +17,25 @@ export default function NoteDetail(props){
 	const [noteContent , setNoteContent ] = useState(noteCopy.content)
 	const [noteComplete, setNoteComplete] = useState(noteCopy.completed)
 
+    const handleQuery = (data)=>{
+        let {expiresIn , createdAt , lastModification} = data.getOneNote;
+		if(expiresIn === "Never"){
+			setNever(true)
+		}else{
+			let expireDate = new Date(Number(expiresIn))
+			let day = String(expiresDate.getDate())
+            let month = String(expiresDate.getMonth() + 1)
+            let year = String(expiresDate.getFullYear())
+            let finalDate  = `${year}-${month.length === 1 ? "0" + month : month}-${day.length === 1 ? "0" + day : day}`
+			setExpiresDay(finalDate)
+		}
+		
+	}
+	const {queryResponse} = useQuery({
+		variables:{noteId:noteId},
+		onCompleted: handleQuery,
+	})
+
 	// expiresIn, created at, modified at 
 
 	return(<BuilderBox>
