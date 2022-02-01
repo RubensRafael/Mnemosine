@@ -90,7 +90,7 @@ export default function NoteBuilder(props){
 	</div>
 	<div>    
     	<input id="never" type="checkbox" checked={newNote.never} onChange={(e)=>{dispatch(setNoteNever(!(newNote.never)));setInputError('')}}></input>
-		<label htmlFor="never"  >Never expires.</label>
+		<label htmlFor="never"  >Never expires</label>
 	</div>
 	<BuilderError error={inputError}>{inputError || 'wrapper'}</BuilderError>
     <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>

@@ -113,3 +113,27 @@ export const CHANGE_NOTE_FOLDER = gql`
 	 	 }
 	 }
 `
+
+
+
+
+export const GET_MORE_NOTE_INFO = gql`
+	query($noteId: String!){
+	 	getOneNote(noteId: $noteId){
+	 		expiresIn,
+	 		createdAt,
+	 		lastModification{
+	 			when
+	 		} 
+	 	 }
+	 }
+`
+
+
+export const UPDATE_NOTE = gql`
+	mutation($noteId: String,$title: String, $content:String, $complete:Boolean, $expiresIn:String, $modifiedAt: String){
+	 	updateNote(noteId: $noteId,title: $title, content:$content, complete:$complete, expiresIn:$expiresIn, modifiedAt: $modifiedAt){
+	 		_id
+	 	 }
+	 }
+`
