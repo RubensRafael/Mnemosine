@@ -2,12 +2,13 @@ import React,{useState} from 'react';
 import styled,{css, keyframes} from 'styled-components';
 import back from '../../icons/back.svg';
 import { useSelector, useDispatch } from 'react-redux';
+import {setView} from '../../redux/main-status-slice'
 //import { useQuery } from '@apollo/client';
 //import { LOGIN_DEV_USER } from '../querys';
 
 
 export default function NoteDetail(props){
-
+    const dispatch = useDispatch()
 	const notePayload = useSelector((state)=>state.mainstatus.value)
 	let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
 	
@@ -22,7 +23,7 @@ export default function NoteDetail(props){
 	
 		<BuilderForm>
 		{false ? <LoadingBox><LoadingImg></LoadingImg></LoadingBox>  : <>
-		<div style={{width: "100%"}} ><CancelButton src={back}></CancelButton></div>
+		<div style={{width: "100%"}} ><CancelButton onClick={()=>dispatch(setView())} src={back}></CancelButton></div>
 		<BuilderTitle>{noteTitle}</BuilderTitle>
 	
 	    <TitleInput value={noteTitle} onChange={(e)=>setNoteTitle(e.target.value)} type="text" placeholder="Input the title here" ></TitleInput>
