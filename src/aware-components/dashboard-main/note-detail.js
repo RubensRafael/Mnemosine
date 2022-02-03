@@ -119,7 +119,7 @@ export default function NoteDetail(props){
 	return(<BuilderBox>
 	
 		<BuilderForm>
-		{false ? <LoadingBox><LoadingImg></LoadingImg></LoadingBox>  : <>
+		{mutationResponse.loading  ? <LoadingBox><LoadingImg></LoadingImg></LoadingBox>  : <>
 		<div style={{width: "100%"}} ><CancelButton onClick={()=>dispatch(setView())} src={back}></CancelButton></div>
 		<BuilderTitle>{noteTitle}</BuilderTitle>
 	
