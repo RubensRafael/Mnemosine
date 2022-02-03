@@ -1,9 +1,10 @@
 import React,{useEffect} from 'react';
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { LIST_NOTES } from '../../querys';
 import { useSelector } from 'react-redux';
 import Card from './note-card'
+import load from '../../icons/loading.svg';
 
 
 export default function MainViewer(props){
@@ -28,7 +29,7 @@ export default function MainViewer(props){
 return (
 	<Viewer>
     {
-       loading ? '' : noteList.reverse().map((note)=><Card key={note._id} note={note}></Card>)
+       loading ? <LoadingIcon src={load}></LoadingIcon> : noteList.reverse().map((note)=><Card key={note._id} note={note}></Card>)
 
     }
 	</Viewer>
@@ -48,4 +49,29 @@ const Viewer = styled.main`
     padding: 10px;
     transition : .2s;
 
+`
+
+const Loading = keyframes`
+  0%{
+      transform : rotate(0deg)
+  }
+  25%{
+      transform : rotate(90deg)
+  }
+  50%{
+  	  transform : rotate(180deg)
+  }
+  75%{
+  	  transform : rotate(270deg)
+  }
+  100%{
+  	  transform : rotate(360deg)
+  }
+`
+const LoadingIcon = styled.img`
+	width: 50px;
+	height: 50px;
+	align-self: center;
+	animation: ${Loading} infinite 0.5s;
+	
 `

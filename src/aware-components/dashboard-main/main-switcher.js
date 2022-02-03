@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import NoteBuilder from './note-builder';
 import NoteDetail from './note-detail';
+import NoteInspect from './note-inspect';
 import MainViewer from './main-viewer';
 
 export default function MainSwitcher(props){
@@ -17,6 +17,9 @@ export default function MainSwitcher(props){
 			break;
 		case 'detail':
 			return(<NoteDetail></NoteDetail>);
+			break;
+		case 'inspect':
+			return(<NoteInspect></NoteInspect>);
 			break;
 		default:
 			return(<div>default</div>);

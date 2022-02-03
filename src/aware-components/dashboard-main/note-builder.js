@@ -18,7 +18,7 @@ export default function NoteBuilder(props){
 	const dispatch = useDispatch()
 	
 
-	let handleNewNoteError = (error) =>{console.log(JSON.stringify(error));setInputError(error.networkError.result.errors[0].message)}
+	let handleNewNoteError = (error) =>{setInputError(error.networkError.result.errors[0].message)}
 	let handleNoteCreated = (data) =>{dispatch(update());dispatch(setView());dispatch(clearNewNote())}
 	const [createNote, { loading}] = useMutation(CREATE_NOTE,{
 		onCompleted : handleNoteCreated,
@@ -195,7 +195,7 @@ const LoadingBox = styled.div`
   position : ${props => props.isLoading ? "relative" : ""};
   text-align: center;
   
-${({ loading }) => loading &&
+${({ isLoading }) => isLoading &&
     css`
       &:before {
        margin-top: 2px;

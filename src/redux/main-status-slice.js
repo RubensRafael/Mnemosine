@@ -17,10 +17,13 @@ export const mainStatusSlice = createSlice({
     setDetail: (state,action) => {
       state.value = ['detail',action.payload]
     },
+    setInspect: (state,action) => {
+      state.value = ['inspect',action.payload]
+    },
   }, 
 })
 
 // Action creators are generated for each case reducer function
-export const { setView, setCreate, setDetail } = mainStatusSlice.actions
+export const { setView, setCreate, setDetail, setInspect } = mainStatusSlice.actions
 
 export default mainStatusSlice.reducer

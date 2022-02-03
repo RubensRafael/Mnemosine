@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useMutation} from '@apollo/client';
 import { TO_COMPLETE_NOTE, REMOVE_ITEM, CHANGE_NOTE_FOLDER } from '../../querys';
 import { update } from '../../redux/side-bar-slice';
-import { setDetail } from '../../redux/main-status-slice';
+import { setInspect } from '../../redux/main-status-slice';
 import checked from  '../../icons/checked.svg';
 import uncheck from '../../icons/uncheck.svg';
 import config from '../../icons/config.svg';
@@ -61,7 +61,7 @@ export default function Card({ note }){
 
 	   </CardBody>
 	:
-	<CardBody onClick={()=>{dispatch(setDetail(note))}}>
+	<CardBody onClick={()=>{dispatch(setInspect(note))}}>
 	   <CardContent>{note.content}</CardContent>
 	   <CardTitle>{note.title}</CardTitle>
 	</CardBody>

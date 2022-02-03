@@ -141,6 +141,9 @@ const NewFolderButtons  = styled.div`
 	cursor: pointer;
 	border-radius: 5px;
 	padding: 2px;
+	display: flex;
+  align-items: center;
+  justify-content: center;
 
 `
 
