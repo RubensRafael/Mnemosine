@@ -12,7 +12,9 @@ import back from '../../icons/back.svg';
 
 
 export default function NoteBuilder(props){
+
 	const [inputError, setInputError] = useState('')
+	const theme = useSelector((state)=>state.theme.value)
 	const newNote = useSelector((state)=>state.newnote.value)
 	const actualFolder = useSelector((state)=>state.actualfolder.value)
 	const dispatch = useDispatch()
@@ -76,13 +78,13 @@ export default function NoteBuilder(props){
 	return (
 	<BuilderBox>
 
-	<BuilderForm>
+	<BuilderForm theme={theme}>
 	{loading ? <LoadingBox isLoading={loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <>
 	<div style={{width: "100%"}} ><CancelButton onClick={()=>{dispatch(setView())}} src={back}></CancelButton></div>
 	<BuilderTitle>Create your note here</BuilderTitle>
 
-    <TitleInput type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value));setInputError('')}}></TitleInput>
-    <ContentInput placeholder="What do you want to remember tomorrow?" rows="7" value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value));setInputError('')}}></ContentInput>
+    <TitleInput theme={theme} type="text" placeholder="Input the title here"  value={newNote.title} onChange={(e)=>{dispatch(setNoteTitle(e.target.value));setInputError('')}}></TitleInput>
+    <ContentInput theme={theme} placeholder="What do you want to remember tomorrow?" rows="7" value={newNote.content} onChange={(e)=>{dispatch(setNoteContent(e.target.value));setInputError('')}}></ContentInput>
     <div>
     	<p>When should the note expire?</p>
     	<input readOnly={newNote.never}  type="date" value={newNote.date} min={newNote.date} onChange={(e)=>{dispatch(setNoteDate(e.target.value));setInputError('')}} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
@@ -117,9 +119,9 @@ const BuilderForm = styled.form`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-    width: 60%;
-    background-color: white;
-
+  width: 60%;
+  background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 `
 const BuilderTitle = styled.h3`
 	
@@ -128,7 +130,8 @@ const BuilderTitle = styled.h3`
 `
 
 const TitleInput = styled.input`
-	background-color: white;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 	border: none;
 	border-bottom: 2px solid #2055c0;
 	outline: none;
@@ -137,7 +140,8 @@ const TitleInput = styled.input`
 `
 
 const ContentInput = styled.textarea`
-	background-color: white;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 	border: 2px solid #2055c0;
 	outline: none;
 	padding : 2px;

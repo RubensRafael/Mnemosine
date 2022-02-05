@@ -11,6 +11,7 @@ import load from '../icons/loading.svg';
 export default function Trash(props){
     
 	const [warn, setWarn] = useState(false)
+	const theme = useSelector((state)=>state.theme.value)
 	const actualFolder = useSelector((state) => state.actualfolder.value)
 	const dispatch = useDispatch()
 	
@@ -25,7 +26,7 @@ export default function Trash(props){
 	return (
 		<>
 			{warn ? <TrashPopUp>
-						<TrashWarn>
+						<TrashWarn theme={theme}>
 							{ !(loading) ? <>
 							    <TrashP>You are trying to remove a folder.<br></br>The following procedures will take place:</TrashP>
 							    <ul>
@@ -77,7 +78,8 @@ const TrashWarn = styled.div`
 	flex-direction: column;
 	align-items:center;
 	justify-content:space-around;
-	background-color:white;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 	padding: 5px;
 
 `
@@ -108,7 +110,7 @@ const TrashButton = styled.div`
 
 const TrashConfirm = styled(TrashButton)`
 	color: red;
-	background-color:white;
+	
 
 	&:hover{
 		background-color: gray;

@@ -9,8 +9,9 @@ import edit from '../../icons/edit.svg';
 export default function NoteDetail(props){
 	
   const dispatch = useDispatch()
-	const notePayload = useSelector((state)=>state.mainstatus.value)
-	let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
+  const theme = useSelector((state)=>state.theme.value)
+  const notePayload = useSelector((state)=>state.mainstatus.value)
+  let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
 	
 
 	
@@ -18,7 +19,7 @@ export default function NoteDetail(props){
 
 	return(<BuilderBox>
 	
-		<BuilderContainer>
+		<BuilderContainer theme={theme}>
 		<>
 		<NoteHeader>
 			<CancelButton onClick={()=>dispatch(setView())} src={back}></CancelButton>
@@ -51,11 +52,13 @@ const BuilderContainer = styled.div`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-  width: 60%;
-  background-color: white;
-  overflow: auto;
-  justify-content: flex-start;
-
+    width: 60%;
+    background-color: white;
+    overflow: auto;
+    justify-content: flex-start;
+    background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+    color:  ${({theme}) => theme === true ? "white" : "black"};
+  
 
 `
 const BuilderTitle = styled.h3`

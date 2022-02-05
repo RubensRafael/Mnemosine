@@ -9,6 +9,7 @@ import starNone from '../icons/star.svg';
 import starLoad from '../icons/star-load.svg';
 import starFull from '../icons/star-full.svg';
 
+
 export default function Star(props){
     
 	

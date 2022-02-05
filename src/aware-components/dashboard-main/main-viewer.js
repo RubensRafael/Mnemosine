@@ -7,7 +7,9 @@ import Card from './note-card'
 import load from '../../icons/loading.svg';
 
 
+
 export default function MainViewer(props){
+	const theme = useSelector((state)=>state.theme.value)
 	const actualFolder = useSelector((state)=>state.actualfolder.value)
 	const update = useSelector((state) => state.sidebarupdate.value)
 	let folderCopy = JSON.parse(JSON.stringify(actualFolder))
@@ -27,7 +29,7 @@ export default function MainViewer(props){
 		noteList = JSON.parse(JSON.stringify(data.getUser.mainOrActualFolder.notes))
 	}
 return (
-	<Viewer>
+	<Viewer theme={theme} >
     {
        loading ? <LoadingIcon src={load}></LoadingIcon> : noteList.reverse().map((note)=><Card key={note._id} note={note}></Card>)
 
@@ -45,9 +47,10 @@ const Viewer = styled.main`
     flex-wrap: wrap;
     overflow: auto;
     justify-content: space-around;
-    background-color: white;
     padding: 10px;
     transition : .2s;
+    background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+    color:  ${({theme}) => theme === true ? "white" : "black"};
 
 `
 

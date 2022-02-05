@@ -14,6 +14,7 @@ import load from '../icons/loading.svg';
 
 export default function SideBar(props){
 	const dispatch = useDispatch()
+	const theme = useSelector((state)=>state.theme.value)
 	const upFolderList = (data) => dispatch(setFolderList(data.getUser.folderList))
 	const { loading, error, data, refetch} = useQuery(FOLDER_LIST,{
 		onCompleted: upFolderList,
@@ -67,7 +68,7 @@ export default function SideBar(props){
 
 	return (
 			
-			<SideBarBox>
+			<SideBarBox theme={theme}>
 				
 				<NewFolder></NewFolder>
 				<FolderList>
@@ -88,6 +89,8 @@ const SideBarBox = styled.div`
 	overflow: auto;
 	grid-column: 1 / 2;
 	grid-row: 1 / 3;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+  color:  ${({theme}) => theme === true ? "white" : "black"};
 	
 @media (max-width: 992px){
 		width: 100%;

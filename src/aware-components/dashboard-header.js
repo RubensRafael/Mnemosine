@@ -17,7 +17,7 @@ import plus from '../icons/plus.svg';
 
 
 export default function DashboardHeader(props){
-
+	const theme = useSelector((state)=>state.theme.value)
 	const actualFolder = useSelector((state) => state.actualfolder.value);
 	const [newName, setNewName  ] = useState({ name:'', editing:false , finish: false});
 	const dispatch = useDispatch()
@@ -45,10 +45,10 @@ export default function DashboardHeader(props){
     
 
 	return (
-			<DashboardHeaderBox>
+			<DashboardHeaderBox theme={theme}>
 				<WrapperClose>
 					<form onSubmit={(e) => {e.preventDefault();setNewName({name: newName.name, editing: false, finish: true})}}>
-						<HeaderFolderInput editing={ newName.editing   }  autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
+						<HeaderFolderInput theme={theme} editing={ newName.editing   }  autoFocus={newName.editing} readOnly={!(newName.editing)} type="text" value={newName.editing || newName.finish ? newName.name : actualFolder.name}  onChange={ (e) => setNewName({name:e.target.value, editing: true, finish: false})} ></HeaderFolderInput>		
 					</form>
 					
 					<SendImg onClick={() => { if(!(loading)){setNewName({name: newName.name, editing: false, finish: true}) }  } } isLoading={loading} show={newName.editing || loading}  src={!(loading) ? send : load} alt="Send New Name Button"></SendImg>
@@ -68,7 +68,7 @@ const DashboardHeaderBox = styled.header`
 	width: 100%;
 	height: 100%;
 	display: flex;
-	background-color:aliceblue ;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
 	align-items: center;
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
@@ -98,8 +98,9 @@ const WrapperClose = styled(Wrapper)`
 const HeaderFolderInput = styled.input`
 	border: none;
 	border: 2px solid ${ ( { editing  } ) => editing ? "#2055c0" : "gray"   };
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 	outline:none;
-	
 	font-weight: bold;
 
 	@media(min-width: 768px){

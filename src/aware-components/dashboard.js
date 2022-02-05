@@ -2,6 +2,7 @@ import React from 'react';
 import MainSwitcher from './dashboard-main/main-switcher';
 import SideBar from './side-bar';
 import DashboardHeader from './dashboard-header';
+import Header from './header';
 import styled from 'styled-components';
 //import { useQuery } from '@apollo/client';
 //import { LOGIN_DEV_USER } from '../querys';
@@ -14,17 +15,19 @@ export default function Dashboard(props){
 	localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYzc3ZjFhMjczZGJjNGU3ZjY4NjliMiJ9.kKe3bM-OCfSRQgBVC8QcCvWxhE2d2l9aDxBFZTgKOOM")
 	
 	return (
+		<>
+			<Header></Header>
 			<DashboardBox>
-				
 				<DashboardHeader></DashboardHeader>
 				<MainSwitcher></MainSwitcher>
 				<SideBar></SideBar>
 			</DashboardBox>
+		</>
 		)
 }
 const DashboardBox = styled.main`
 	
-	margin-top: 10vh;
+	
 	height: 90vh;
 	width: 100%;
 	display: grid;

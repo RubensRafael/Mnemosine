@@ -11,6 +11,7 @@ import logo from '../../icons/logo.png';
 export default function NoteDetail(props){
 	
   const dispatch = useDispatch()
+  const theme = useSelector((state)=>state.theme.value)
 	const notePayload = useSelector((state)=>state.mainstatus.value)
 	let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
 	const [noteId] = useState(noteCopy._id)
@@ -119,13 +120,13 @@ export default function NoteDetail(props){
 	}
 	return(<BuilderBox>
 	
-		<BuilderForm>
+		<BuilderForm theme={theme}>
 		{mutationResponse.loading  ? <LoadingBox isLoading={mutationResponse.loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <>
 		<div style={{width: "100%"}} ><CancelButton onClick={()=>dispatch(setInspect(noteCopy))} src={back}></CancelButton></div>
 		<BuilderTitle>{noteTitle}</BuilderTitle>
 	
-	    <TitleInput value={noteTitle} onChange={(e)=>setNoteTitle(e.target.value)} type="text" placeholder="Input the title here" ></TitleInput>
-	    <ContentInput value={noteContent} onChange={(e)=> setNoteContent(e.target.value)} placeholder="What do you want to remember tomorrow?" rows="7" ></ContentInput>
+	    <TitleInput theme={theme} value={noteTitle} onChange={(e)=>setNoteTitle(e.target.value)} type="text" placeholder="Input the title here" ></TitleInput>
+	    <ContentInput theme={theme} value={noteContent} onChange={(e)=> setNoteContent(e.target.value)} placeholder="What do you want to remember tomorrow?" rows="7" ></ContentInput>
 	    <div>
 	    	<p>When should the note expire?</p>
 	    	<input readOnly={noteNever || queryResponse.loading } type="date" value={noteExpiresDay} onChange={(e)=> setNoteExpiresDay(e.target.value)} required={true} pattern="\d{4}-\d{2}-\d{2}"></input>
@@ -169,9 +170,9 @@ const BuilderForm = styled.form`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-    width: 60%;
-    background-color: white;
-
+  width: 60%;
+  background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+  color:  ${({theme}) => theme === true ? "white" : "black"};
 
 `
 const BuilderTitle = styled.h3`
@@ -185,6 +186,8 @@ const TitleInput = styled.input`
 	border: none;
 	border-bottom: 2px solid #2055c0;
 	outline: none;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+  color:  ${({theme}) => theme === true ? "white" : "black"};
 	
 
 `
@@ -194,6 +197,8 @@ const ContentInput = styled.textarea`
 	border: 2px solid #2055c0;
 	outline: none;
 	padding : 2px;
+	background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
+	color:  ${({theme}) => theme === true ? "white" : "black"};
 
 `
 
@@ -267,7 +272,7 @@ const DateInfoBox = styled.div`
     display: flex;
     font-size: 0.8rem;
     justify-content: space-evenly;
-    color: darkslategray;
+    color: gray;
 
 `
 
