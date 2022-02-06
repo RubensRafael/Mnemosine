@@ -74,6 +74,7 @@ export default function Card({ note }){
 }
 
 function CardTrash(props){
+	const theme = useSelector((state)=>state.theme.value)
 	const dispatch = useDispatch()
 	let handleRemovedNote = () => {dispatch(update());props.trashBack();props.noteDisappear()}
 	const [removeNote, removeNoteResponse] = useMutation(REMOVE_ITEM,{
@@ -82,7 +83,7 @@ function CardTrash(props){
 
 	return(
 		<TrashPopUp>
-			<TrashWarn>
+			<TrashWarn theme={theme}>
 				{ !(removeNoteResponse.loading) ? <>
 					<TrashP>Do you really want to remove this note?</TrashP>
 					<TrashChoose>
@@ -97,7 +98,7 @@ function CardTrash(props){
 }
 
 function CardMove(props){
-
+    const theme = useSelector((state)=>state.theme.value)
 	const dispatch = useDispatch()
 	let handleChangeComplete = () => {dispatch(update());props.back();props.noteDisappear()}
 	const [changeNoteFolder, {loading}] = useMutation(CHANGE_NOTE_FOLDER,{
@@ -108,7 +109,7 @@ function CardMove(props){
 	const actualFolder = useSelector((state)=>state.actualfolder.value)
 	const copyList = JSON.parse(JSON.stringify(folderList))
 	return(<TrashPopUp>
-			<TrashWarn islist={true}>
+			<TrashWarn theme={theme} islist={true}>
 			<div style={{width: "100%"}} ><img alt="back" onClick={props.back} src={back}></img></div>
 			<h3 style={{borderBottom: "#2055c0 solid 2px",width: "100%", textAlign: "center"}}>Choose the folder to replace the note</h3>
 				{ !(loading)  ? <> {copyList.reverse().filter((folder)=>folder._id  !== actualFolder._id).map((folder)=>{return(<FolderOption onClick={()=>changeNoteFolder({variables : {noteId:props.note._id,from:actualFolder._id,to:folder._id,modifiedAt:String(new Date().getTime())}})} >{folder.name}</FolderOption>)})}
@@ -231,7 +232,8 @@ const TrashWarn = styled.div`
 	flex-direction: column;
 	align-items:center;
 	justify-content : ${({islist})=> islist ? 'flex-start' : 'space-around'};
-	background-color:white;
+	background-color:${({theme})=> theme === true ? '#272727' : 'white'};
+	color: ${({theme})=>theme === true ? 'white' : 'black'};
 	padding: 5px;
 	overflow : auto;
 
