@@ -265,7 +265,7 @@ const TrashButton = styled.div`
 
 const TrashConfirm = styled(TrashButton)`
 	color: red;
-	background-color:white;
+	background-color:none;
 
 	&:hover{
 		background-color: gray;

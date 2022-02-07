@@ -3,13 +3,13 @@ import client from '../request';
 import folderIcon from '../icons/new-folder.svg';
 import logo from '../icons/logo.png';
 import { CREATE_FOLDER } from '../querys';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import { update } from '../redux/side-bar-slice';
 import { change } from '../redux/actual-folder';
 import styled, { css, keyframes } from 'styled-components';
 
 export default function NewFolder(){
-
+    const theme = useSelector((state)=>state.theme.value)
 	let dispatch = useDispatch()
 	let [newFolderPopUp , setNewFolderPopUp] = useState(false);
 	let [value , setValue] = useState('');
@@ -42,14 +42,14 @@ export default function NewFolder(){
 				<p>New Folder</p>
 		</NewFolderButton> :
 		<NewFolderPopup>
-			<NewFolderBox>
+			<NewFolderBox theme={theme}>
 				<NewFolderBoxChild>
 					<NewFolderMessage error={reqStatus.error}>{reqStatus.warn}</NewFolderMessage>
 				</NewFolderBoxChild>
 				<NewFolderBoxChild2 loading={reqStatus.loading}>
 					{reqStatus.loading ? <NewFolderLoadingImg src={logo} alt="Logo"></NewFolderLoadingImg> :
 					<NewFolderForm onSubmit={createNewFolder}>
-						<NewFolderInput autoFocus={true} placeholder="Input the name of your folder." value={value} onChange={(e) => setValue(e.target.value)} type="text"></NewFolderInput>
+						<NewFolderInput theme={theme} autoFocus={true} placeholder="Input the name of your folder." value={value} onChange={(e) => setValue(e.target.value)} type="text"></NewFolderInput>
 					</NewFolderForm>}
 				</NewFolderBoxChild2>
 				<NewFolderBoxChild3>
@@ -98,7 +98,7 @@ const NewFolderBox = styled.div`
 	flex-direction: column;
 	justify-content:space-around;
 	align-items: center;
-	background-color:white;
+	background-color: ${({theme})=> theme === true ? '#272727' : 'white'} ;
 	width: 60%;
 	height: 200px;
 	padding: 10px;
@@ -131,6 +131,8 @@ const NewFolderInput = styled.input`
 	outline: none;
 	border-bottom: 2px #2055c0 solid;
 	width: 100%;
+	background-color : ${({theme})=> theme === true ? '#272727' : 'white'} ;
+	color: ${({theme})=> theme === true ? 'white' : 'black'} ;
 `
 
 const NewFolderButtons  = styled.div`
@@ -150,6 +152,7 @@ const NewFolderButtons  = styled.div`
 const NewFolderCancel = styled(NewFolderButtons)`
 	
 	color: #2055c0;
+	background-color : none;
 `
 const NewFolderSend = styled(NewFolderButtons)`
 	
