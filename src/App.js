@@ -1,9 +1,9 @@
 import './App.css';
-import Dashboard from './aware-components/dashboard'
+import Routers from './routers'
 
 function App() {
   return (
-   <Dashboard></Dashboard>
+    <Routers></Routers>
   );
 }
 
