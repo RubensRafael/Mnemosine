@@ -1,18 +1,22 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import MainSwitcher from './dashboard-main/main-switcher';
 import SideBar from './side-bar';
 import DashboardHeader from './dashboard-header';
 import Header from './header';
 import styled from 'styled-components';
-//import { useQuery } from '@apollo/client';
-//import { LOGIN_DEV_USER } from '../querys';
-//import client from '../request';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Dashboard(props){
-
-
 	
-	localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYzc3ZjFhMjczZGJjNGU3ZjY4NjliMiJ9.kKe3bM-OCfSRQgBVC8QcCvWxhE2d2l9aDxBFZTgKOOM")
+	const navigate = useNavigate()
+	
+	useEffect(()=>{
+		if(localStorage.getItem('token') === null){navigate('/')}
+
+	})
+	//localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYzc3ZjFhMjczZGJjNGU3ZjY4NjliMiJ9.kKe3bM-OCfSRQgBVC8QcCvWxhE2d2l9aDxBFZTgKOOM")
+	
 	
 	return (
 		<>

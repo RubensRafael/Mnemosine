@@ -6,20 +6,21 @@ import logo from '../icons/logo.png';
 import sun from '../icons/sun.svg';
 import moon from '../icons/moon.svg';
 import logout from '../icons/logout.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Header(props){
 	const theme = useSelector((state)=>state.theme.value)
 	const dispatch = useDispatch()
 	const [toMoon, setToMoon] = useState(false)
-	
+	const navigate = useNavigate()
 	
 	return (
 			<HeaderBox theme={theme}>
 				<LogoIcon src={logo}></LogoIcon>
 				<UtilsBox>
 					<ThemeIcon onClick={()=>{setToMoon(!(toMoon));dispatch(toggleTheme())}} src={toMoon ? moon : sun}></ThemeIcon>
-					<LogoutIcon src={logout}></LogoutIcon>
+					<LogoutIcon onClick={()=>{localStorage.removeItem('token');navigate('/')}}src={logout}></LogoutIcon>
 				</UtilsBox>
 			</HeaderBox>
 		)

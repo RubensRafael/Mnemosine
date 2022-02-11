@@ -137,3 +137,11 @@ export const UPDATE_NOTE = gql`
 	 	 }
 	 }
 `
+
+export const CREATE_USER = gql`
+	mutation($name: String, $email: String, $password: String){
+	 	createUser(name: $name,email: $email, password:$password)
+	 }
+`
+
+//loginUser(email: String, password: String) : String!

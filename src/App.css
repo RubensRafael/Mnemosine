@@ -1,3 +1,7 @@
+/*
+
+MAIN COLOR = #2055c0
+*/
 *{
   margin: 0;
   padding: 0;
@@ -5,7 +9,17 @@
   transition: .2s;
 }
 
+input{
+  border : none;
+  outline: none;
+}
 
+button{
+  display: block;
+  border: none;
+  background-color: transparent;
+  cursor:  pointer ;
+}
 
 @media (min-width: 992px) {
 
@@ -114,8 +128,3 @@
   }
 
 }
-
-/*
-
-MAIN COLOR = #2055c0
-*/

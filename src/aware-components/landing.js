@@ -1,17 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import LandImg from '../icons/land.png';
 import logo from '../icons/logo.png';
+import { useMutation  } from '@apollo/client';
+import { CREATE_USER  } from '../querys';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Landing(props){
+	const [display, setDisplay] = useState('')
+
+	const showRegister = ()=>{
+		setDisplay('register')
+	}
+
+	const showDefault = ()=>{
+		setDisplay('')
+	}
 	return(
 			<LandingBox>
 				<LandingHeader>
 					<LogoIcon src={logo} alt='logo'></LogoIcon>
 					<ButtonsBox>
-						<SignInButton>Sign In</SignInButton>
-						<SignUpButton>Sign Up</SignUpButton>
+						{display === 'register' ? <Register back={showDefault}></Register> : <SignUpButton onClick={showRegister} >Sign Up</SignUpButton>}
+						{<SignInButton>Sign In</SignInButton>}
 					</ButtonsBox>
 				</LandingHeader>
 				<LandingMain>
@@ -24,6 +36,73 @@ export default function Landing(props){
 					</LandingImgBox>
 				</LandingMain>
 			</LandingBox>
+
+		)
+
+		
+}
+
+function Register({back}){
+	const navigate = useNavigate()
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [pw, setPw] = useState('')
+	const [inputError,setInputError] = useState('')
+
+	const handleError = (error)=>{setInputError(error.networkError.result.errors[0].message)}
+	const handleUserCreated = (data)=>{localStorage.setItem('token',data.createUser);navigate('/dashboard')}
+	const [createUser,{loading}] = useMutation(CREATE_USER ,{
+		onCompleted : handleUserCreated,
+		onError: handleError,
+		fetchPolicy: 'no-cache'
+	});
+
+
+
+	const handleSubmit = (e)=>{
+			e.preventDefault()
+			setInputError('')
+			
+			//eslint-disable-next-line
+			let regex = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")
+
+			if(!(regex.test(email)) || email.length < 1){
+				//se o email não passar
+				setInputError('Invalid Email')
+			}else if(name.length < 1){
+				setInputError('Fill up all fields')
+			}else if(pw.length < 6){
+				setInputError('Password is too short')
+			}else{
+				createUser({variables:{
+					name:name,
+					email:email,
+					password:pw
+				}})
+			}
+		}
+
+	
+		
+		
+	
+	return(
+			<LadingPopUp>
+
+						<RegisterForm>
+
+							{loading ? <div>carregnado</div> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Fill up the fields, to register an account</h3>
+							<LandInput onChange={(e)=>{setInputError('');setName(e.target.value)}} value={name} placeholder="Your Name" type="text"></LandInput>
+							<LandInput onChange={(e)=>{setInputError('');setEmail(e.target.value)}} value={email} placeholder="email@host.com" type="email"></LandInput>
+							<LandInput onChange={(e)=>{setInputError('');setPw(e.target.value)}} value={pw} placeholder="Your password" type="password"></LandInput>
+							<RegisterWarn error={inputError}>{inputError || 'break'}</RegisterWarn>
+							<PopUpButtonBox>
+								<CancelButton onClick={back}>Cancel</CancelButton>
+								<ConfirmButton onClick={handleSubmit}>Confirm</ConfirmButton>
+							</PopUpButtonBox></>}
+						</RegisterForm>
+
+			</LadingPopUp>	
 
 		)
 
@@ -90,8 +169,6 @@ const LandingImgBox = styled.div`
 
 	display: flex;
 	
-	
-
    
 `
 
@@ -135,7 +212,7 @@ const ButtonsBox = styled.div`
     }
 
 `
-const SignInButton = styled.button`
+const SignUpButton = styled.button`
 	display: block;
     border: none;
     background: transparent;
@@ -152,7 +229,7 @@ const SignInButton = styled.button`
 `
 
 
-const SignUpButton = styled.button`
+const SignInButton = styled.button`
 	display: block;
     border: none;
     background: #2055c0;
@@ -167,3 +244,67 @@ const SignUpButton = styled.button`
     }
 
 `
+
+
+const LadingPopUp = styled.div`
+	display:  flex;
+	position: fixed;
+	top:0%;
+	left:0%;
+	justify-content: space-around;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	background-color:rgba(0,0,0,0.5);
+
+`
+
+const RegisterForm = styled.form`
+	display:  flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 60%;
+	height: 350px;
+    background-color: white;
+
+`
+
+const LandInput = styled.input`
+	width: 90%;
+	border-bottom : 2px solid #2055c0;
+
+
+`
+
+const RegisterWarn = styled.p`
+	width: 100%;
+	color : red;
+	text-align: center;
+	transition: 0s;
+	visibility : ${({error})=> error ? 'visible' : 'hidden'} ;
+
+
+`
+
+
+const PopUpButtonBox = styled.div`
+	display:  flex;
+	justify-content: space-evenly;
+	width:100%;
+	
+
+`
+
+const CancelButton = styled(SignUpButton)`
+	
+	
+
+`
+const ConfirmButton = styled(SignInButton)`
+	
+	
+
+`
+
+
