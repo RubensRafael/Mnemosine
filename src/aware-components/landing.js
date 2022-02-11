@@ -1,17 +1,28 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, {useState, useEffect} from 'react';
+import styled, {keyframes} from 'styled-components';
 import LandImg from '../icons/land.png';
 import logo from '../icons/logo.png';
-import { useMutation  } from '@apollo/client';
-import { CREATE_USER  } from '../querys';
+import load from '../icons/loading.svg';
+import { useMutation, useLazyQuery  } from '@apollo/client';
+import { CREATE_USER, LOGIN_USER  } from '../querys';
 import { useNavigate } from 'react-router-dom';
 
 
 export default function Landing(props){
+	const navigate = useNavigate()
+	useEffect(()=>{
+		if(localStorage.getItem('token') !== null){
+			navigate('/dashboard')
+		}
+		//eslint-disable-next-line
+	},[0])
 	const [display, setDisplay] = useState('')
 
 	const showRegister = ()=>{
 		setDisplay('register')
+	}
+	const showLogin = ()=>{
+		setDisplay('login')
 	}
 
 	const showDefault = ()=>{
@@ -23,7 +34,7 @@ export default function Landing(props){
 					<LogoIcon src={logo} alt='logo'></LogoIcon>
 					<ButtonsBox>
 						{display === 'register' ? <Register back={showDefault}></Register> : <SignUpButton onClick={showRegister} >Sign Up</SignUpButton>}
-						{<SignInButton>Sign In</SignInButton>}
+						{display === 'login' ? <Login back={showDefault}></Login> : <SignInButton onClick={showLogin} >Sign In</SignInButton>}
 					</ButtonsBox>
 				</LandingHeader>
 				<LandingMain>
@@ -91,8 +102,67 @@ function Register({back}){
 
 						<RegisterForm>
 
-							{loading ? <div>carregnado</div> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Fill up the fields, to register an account</h3>
+							{loading ? <LoadingIcon src={load} ></LoadingIcon> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Fill up the fields, to register an account</h3>
 							<LandInput onChange={(e)=>{setInputError('');setName(e.target.value)}} value={name} placeholder="Your Name" type="text"></LandInput>
+							<LandInput onChange={(e)=>{setInputError('');setEmail(e.target.value)}} value={email} placeholder="email@host.com" type="email"></LandInput>
+							<LandInput onChange={(e)=>{setInputError('');setPw(e.target.value)}} value={pw} placeholder="Your password" type="password"></LandInput>
+							<RegisterWarn error={inputError}>{inputError || 'break'}</RegisterWarn>
+							<PopUpButtonBox>
+								<CancelButton onClick={back}>Cancel</CancelButton>
+								<ConfirmButton onClick={handleSubmit}>Confirm</ConfirmButton>
+							</PopUpButtonBox></>}
+						</RegisterForm>
+
+			</LadingPopUp>	
+
+		)
+
+		
+}
+
+function Login({back}){
+	const navigate = useNavigate()
+	const [email, setEmail] = useState('')
+	const [pw, setPw] = useState('')
+	const [inputError,setInputError] = useState('')
+
+	const handleError = (error)=>{setInputError(error.networkError.result.errors[0].message)}
+	const handleLoginUser = (data)=>{localStorage.setItem('token',data.loginUser);navigate('/dashboard')}
+	const [loginUser,{loading}] = useLazyQuery(LOGIN_USER ,{
+		variables:{		
+					email:email,
+					password:pw
+				},
+		onCompleted : handleLoginUser,
+		onError: handleError,
+		fetchPolicy: 'no-cache'
+	});
+
+
+
+	const handleSubmit = (e)=>{
+			e.preventDefault()
+			setInputError('')
+			
+			if(pw.length <1 || email.length < 1){
+				
+				setInputError('Fill up all fiels')
+			}else{
+				loginUser()
+			}
+		}
+
+	
+		
+		
+	
+	return(
+			<LadingPopUp>
+
+						<RegisterForm>
+
+							{loading ? <LoadingIcon src={load} ></LoadingIcon> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Fill up the fields, to register an account</h3>
+							
 							<LandInput onChange={(e)=>{setInputError('');setEmail(e.target.value)}} value={email} placeholder="email@host.com" type="email"></LandInput>
 							<LandInput onChange={(e)=>{setInputError('');setPw(e.target.value)}} value={pw} placeholder="Your password" type="password"></LandInput>
 							<RegisterWarn error={inputError}>{inputError || 'break'}</RegisterWarn>
@@ -306,5 +376,28 @@ const ConfirmButton = styled(SignInButton)`
 	
 
 `
-
+const Loading = keyframes`
+  0%{
+      transform : rotate(0deg)
+  }
+  25%{
+      transform : rotate(90deg)
+  }
+  50%{
+  	  transform : rotate(180deg)
+  }
+  75%{
+  	  transform : rotate(270deg)
+  }
+  100%{
+  	  transform : rotate(360deg)
+  }
+`
+const LoadingIcon = styled.img`
+	width: 50px;
+	height: 50px;
+	align-self: center;
+	animation: ${Loading} infinite 0.5s;
+	
+`
 

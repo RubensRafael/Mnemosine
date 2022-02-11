@@ -1,12 +1,6 @@
 import {gql} from "@apollo/client";
 
 
-export const LOGIN_DEV_USER = gql`
-	query {
-		loginUser(email: "React",password:"React")
-	}
-
-`
 
 export const CREATE_FOLDER = gql`
 	
@@ -144,4 +138,10 @@ export const CREATE_USER = gql`
 	 }
 `
 
-//loginUser(email: String, password: String) : String!
+export const LOGIN_USER = gql`
+	query($email: String, $password: String){
+	 	loginUser(email: $email, password:$password)
+	 }
+`
+
+

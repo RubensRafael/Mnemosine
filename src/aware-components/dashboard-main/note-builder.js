@@ -24,7 +24,8 @@ export default function NoteBuilder(props){
 	let handleNoteCreated = (data) =>{dispatch(update());dispatch(setView());dispatch(clearNewNote())}
 	const [createNote, { loading}] = useMutation(CREATE_NOTE,{
 		onCompleted : handleNoteCreated,
-		onError: handleNewNoteError
+		onError: handleNewNoteError,
+		fetchPolicy: "no-cache"
 	});
 
 	const handleSubmit = (e) =>{

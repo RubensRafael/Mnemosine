@@ -20,7 +20,7 @@ export default function Header(props){
 				<LogoIcon src={logo}></LogoIcon>
 				<UtilsBox>
 					<ThemeIcon onClick={()=>{setToMoon(!(toMoon));dispatch(toggleTheme())}} src={toMoon ? moon : sun}></ThemeIcon>
-					<LogoutIcon onClick={()=>{localStorage.removeItem('token');navigate('/')}}src={logout}></LogoutIcon>
+					<LogoutIcon onClick={()=>{localStorage.removeItem('token');navigate('/');window.location.reload();}}src={logout}></LogoutIcon>
 				</UtilsBox>
 			</HeaderBox>
 		)

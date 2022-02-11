@@ -15,7 +15,7 @@ export default function Dashboard(props){
 		if(localStorage.getItem('token') === null){navigate('/')}
 
 	})
-	//localStorage.setItem('token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYzc3ZjFhMjczZGJjNGU3ZjY4NjliMiJ9.kKe3bM-OCfSRQgBVC8QcCvWxhE2d2l9aDxBFZTgKOOM")
+
 	
 	
 	return (

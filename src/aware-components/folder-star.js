@@ -18,6 +18,7 @@ export default function Star(props){
 	const handleIsMainChanged = () =>{dispatch(update());dispatch(mainChanged(true))}
 	const [changeToMain , { loading }] = useMutation(CHANGE_FOLDER_TOMAIN ,{
 		onCompleted : handleIsMainChanged,
+		fetchPolicy: "no-cache"
 	});
 	const actualFolder = useSelector((state) => state.actualfolder.value )
 

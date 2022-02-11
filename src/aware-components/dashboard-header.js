@@ -27,6 +27,7 @@ export default function DashboardHeader(props){
 	let handleNameChanged = (data) =>{dispatch(update());dispatch(nameChanged(data.updateFolder.name))}
 	const [changeName, { loading }] = useMutation(CHANGE_FOLDER_NAME,{
 		onCompleted : handleNameChanged,
+		fetchPolicy: "no-cache"
 	});
     
 	useEffect(()=>{
