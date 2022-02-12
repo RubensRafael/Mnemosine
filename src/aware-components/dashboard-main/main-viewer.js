@@ -41,7 +41,7 @@ return (
 	
 	
 }
-const Viewer = styled.main`
+const Viewer = styled.div`
 
 	 display: flex;
     flex-wrap: wrap;

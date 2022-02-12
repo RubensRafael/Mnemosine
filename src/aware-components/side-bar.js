@@ -81,7 +81,7 @@ export default function SideBar(props){
 		)
 }
 
-const SideBarBox = styled.div`
+const SideBarBox = styled.section`
     width: 100%;
 	background-color: white;
 	display:  flex;

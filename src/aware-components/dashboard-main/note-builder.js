@@ -108,7 +108,7 @@ export default function NoteBuilder(props){
 		)
 }
 
-const BuilderBox = styled.main`
+const BuilderBox = styled.div`
 	display: flex;
     justify-content: center;
 

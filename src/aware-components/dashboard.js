@@ -29,7 +29,7 @@ export default function Dashboard(props){
 		</>
 		)
 }
-const DashboardBox = styled.main`
+const DashboardBox = styled.div`
 	
 	
 	height: 90vh;
