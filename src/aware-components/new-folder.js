@@ -135,7 +135,7 @@ const NewFolderInput = styled.input`
 	color: ${({theme})=> theme === true ? 'white' : 'black'} ;
 `
 
-const NewFolderButtons  = styled.div`
+const NewFolderButtons  = styled.button`
  
   height : 30px;
   width : 100%;

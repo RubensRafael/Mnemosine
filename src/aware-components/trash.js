@@ -93,7 +93,7 @@ const TrashChoose = styled.div`
 
 `
 
-const TrashButton = styled.div`
+const TrashButton = styled.button`
      
     height : 40px;
 	width : 100%;

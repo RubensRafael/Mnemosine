@@ -156,7 +156,7 @@ const BuilderError = styled.p`
 	visibility: ${props => props.error ? "visible" : "hidden"};
 
 `
-const SaveButton = styled.div`
+const SaveButton = styled.button`
 	background-color : #2055c0;
 	border: #2055c0 solid 2px;
 	color : white;
