@@ -56,7 +56,9 @@ export const FOLDER_LIST = gql`
 						completed,
 						dates,
 						isMain
-					}
+					},
+					name
+
 					
 				}
 			}

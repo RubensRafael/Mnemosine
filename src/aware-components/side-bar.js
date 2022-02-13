@@ -15,7 +15,7 @@ import load from '../icons/loading.svg';
 export default function SideBar(props){
 	const dispatch = useDispatch()
 	const theme = useSelector((state)=>state.theme.value)
-	const upFolderList = (data) => dispatch(setFolderList(data.getUser.folderList))
+	const upFolderList = (data) =>{dispatch(setFolderList(data.getUser.folderList));document.title = `${data.getUser.name} Dashboard` }
 	const { loading, error, data, refetch} = useQuery(FOLDER_LIST,{
 		onCompleted: upFolderList,
 		fetchPolicy:'no-cache',
