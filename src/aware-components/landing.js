@@ -31,7 +31,7 @@ export default function Landing(props){
 	return(
 			<LandingBox>
 				<LandingHeader>
-					<LogoIcon src={logo} alt='logo'></LogoIcon>
+					<a target='blank' href="https://github.com/RubensRafael/Mnemosine"><LogoIcon src={logo}></LogoIcon></a>
 					<ButtonsBox>
 						{display === 'register' ? <Register back={showDefault}></Register> : <SignUpButton onClick={showRegister} >Sign Up</SignUpButton>}
 						{display === 'login' ? <Login back={showDefault}></Login> : <SignInButton onClick={showLogin} >Sign In</SignInButton>}
@@ -263,6 +263,7 @@ const LandingImg = styled.img`
 
 const LogoIcon = styled.img`
 	height:50px;
+	cursor:pointer;
 
 	@media(min-width: 1440px){
     	height:70px;

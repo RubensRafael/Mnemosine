@@ -13,7 +13,7 @@ export default function NoteDetail(props){
   const notePayload = useSelector((state)=>state.mainstatus.value)
   let noteCopy  = JSON.parse(JSON.stringify(notePayload[1]))
 	
-
+ 
 	
 	
 
@@ -52,12 +52,17 @@ const InspectContainer = styled.div`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-    width: 60%;
+    width: 80%;
     background-color: white;
     overflow: auto;
     justify-content: flex-start;
     background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
     color:  ${({theme}) => theme === true ? "white" : "black"};
+
+    @media(max-width: 768px){
+	   width: 90%;
+     
+	}
   
 
 `

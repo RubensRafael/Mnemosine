@@ -12,10 +12,8 @@ import back  from  '../../icons/back.svg';
 import trash  from  '../../icons/trash.svg';
 import folderIcon from "../../icons/change-folder.svg";
 import load from '../../icons/loading.svg';
+ 
 
-
-//<MoveNoteFolderList back={toggleMoveNote} ></MoveNoteFolderList>
-//<NoteTrash back={toggleTrash}></NoteTrash> 
 
 export default function Card({ note }){
 	const dispatch = useDispatch()

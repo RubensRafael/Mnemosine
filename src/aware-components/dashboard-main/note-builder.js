@@ -9,7 +9,7 @@ import { update } from '../../redux/side-bar-slice';
 import logo from '../../icons/logo.png';
 import back from '../../icons/back.svg';
 
-
+ 
 
 export default function NoteBuilder(props){
 
@@ -120,9 +120,14 @@ const BuilderForm = styled.form`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-  width: 60%;
+  width: 80%;
   background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
 	color:  ${({theme}) => theme === true ? "white" : "black"};
+
+	@media(max-width: 768px){
+	   width: 90%;
+     
+	}
 `
 const BuilderTitle = styled.h3`
 	

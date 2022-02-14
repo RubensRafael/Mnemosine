@@ -17,7 +17,7 @@ export default function Header(props){
 	
 	return (
 			<HeaderBox theme={theme}>
-				<LogoIcon src={logo}></LogoIcon>
+			<a target='blank' href="https://github.com/RubensRafael/Mnemosine"><LogoIcon src={logo}></LogoIcon></a>
 				<UtilsBox>
 					<ThemeIcon onClick={()=>{setToMoon(!(toMoon));dispatch(toggleTheme())}} src={toMoon ? moon : sun}></ThemeIcon>
 					<LogoutIcon onClick={()=>{localStorage.removeItem('token');navigate('/');window.location.reload();}}src={logout}></LogoutIcon>
@@ -51,6 +51,7 @@ const UtilsBox = styled.div`
 const LogoIcon = styled.img`
 
 	height:40px;
+	cursor: pointer;
 	
 `
 const ThemeIcon = styled.img`

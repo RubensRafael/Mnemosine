@@ -115,9 +115,7 @@ export default function NoteDetail(props){
     }
 
 }
-	if(mutationResponse.error){
-		console.log(JSON.stringify(mutationResponse.error))
-	}
+	
 	return(<DetailBox>
 	
 		<DetailForm theme={theme}>
@@ -170,9 +168,14 @@ const DetailForm = styled.form`
 	border-right: solid 2px #2055c0;
 	border-left: solid 2px #2055c0;
 	padding: 3px;
-  width: 60%;
+  width: 80%;
   background-color:  ${({theme}) => theme === true ? "#272727" : "white"};
   color:  ${({theme}) => theme === true ? "white" : "black"};
+
+  @media(max-width: 768px){
+	   width: 90%;
+     
+	}
 
 `
 const DetailTitle = styled.h3`
