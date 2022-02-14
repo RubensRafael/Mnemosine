@@ -118,12 +118,12 @@ export default function NoteDetail(props){
 	if(mutationResponse.error){
 		console.log(JSON.stringify(mutationResponse.error))
 	}
-	return(<BuilderBox>
+	return(<DetailBox>
 	
-		<BuilderForm theme={theme}>
+		<DetailForm theme={theme}>
 		{mutationResponse.loading  ? <LoadingBox isLoading={mutationResponse.loading}><LoadingImg src={logo}></LoadingImg></LoadingBox>  : <>
 		<div style={{width: "100%"}} ><CancelButton onClick={()=>dispatch(setInspect(noteCopy))} src={back}></CancelButton></div>
-		<BuilderTitle>{noteTitle}</BuilderTitle>
+		<DetailTitle>{noteTitle}</DetailTitle>
 	
 	    <TitleInput theme={theme} value={noteTitle} onChange={(e)=>setNoteTitle(e.target.value)} type="text" placeholder="Input the title here" ></TitleInput>
 	    <ContentInput theme={theme} value={noteContent} onChange={(e)=> setNoteContent(e.target.value)} placeholder="What do you want to remember tomorrow?" rows="7" ></ContentInput>
@@ -146,24 +146,24 @@ export default function NoteDetail(props){
 			<p>{`Created At: ${noteCreatedAt}`}</p>
 			<p>{noteLastMod ? `Last Modification: ${noteLastMod}` : ''}</p>
 		</DateInfoBox>
-		<BuilderError error={inputError}>{inputError || 'wrapper'}</BuilderError>
+		<DetailError error={inputError}>{inputError || 'wrapper'}</DetailError>
 	  <SaveButton role="button" onClick={handleSubmit}>SAVE</SaveButton>
 	   
 	    </>}
 	    
-		</BuilderForm>
+		</DetailForm>
 		
-		</BuilderBox>)
+		</DetailBox>)
 
 }
 
-const BuilderBox = styled.div`
+const DetailBox = styled.div`
 	display: flex;
     justify-content: center;
 
 
 `
-const BuilderForm = styled.form`
+const DetailForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -175,7 +175,7 @@ const BuilderForm = styled.form`
   color:  ${({theme}) => theme === true ? "white" : "black"};
 
 `
-const BuilderTitle = styled.h3`
+const DetailTitle = styled.h3`
 	
 	text-align: center;
 
@@ -202,7 +202,7 @@ const ContentInput = styled.textarea`
 
 `
 
-const BuilderError = styled.p`
+const DetailError = styled.p`
 	color: red;
 	transition : .2s;
 	text-align: center;

@@ -17,15 +17,15 @@ export default function NoteDetail(props){
 	
 	
 
-	return(<BuilderBox>
+	return(<InspectBox>
 	
-		<BuilderContainer theme={theme}>
+		<InspectContainer theme={theme}>
 		<>
 		<NoteHeader>
 			<CancelButton onClick={()=>dispatch(setView())} src={back}></CancelButton>
 			<EditButton onClick={()=>dispatch(setDetail(noteCopy))} src={edit}></EditButton>
 		</NoteHeader>
-		<BuilderTitle>{noteCopy.title}</BuilderTitle>
+		<InspectTitle>{noteCopy.title}</InspectTitle>
 		<h3>
 			{noteCopy.content}
 		</h3>
@@ -33,19 +33,19 @@ export default function NoteDetail(props){
 	   
 	    </>
 	    
-		</BuilderContainer>
+		</InspectContainer>
 		
-		</BuilderBox>)
+		</InspectBox>)
 
 }
 
-const BuilderBox = styled.div`
+const InspectBox = styled.div`
 	display: flex;
     justify-content: center;
 
 
 `
-const BuilderContainer = styled.div`
+const InspectContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -61,7 +61,7 @@ const BuilderContainer = styled.div`
   
 
 `
-const BuilderTitle = styled.h3`
+const InspectTitle = styled.h3`
 	
 	text-align: center;
 	border-bottom: solid 2px #2055c0;
