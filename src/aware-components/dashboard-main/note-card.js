@@ -46,7 +46,7 @@ export default function Card({ note }){
 	const makeNoteDisappear = () => setRemovedNote(true)
 	const isNever = note.expiresIn === 'Never' ? true : false;
 	let isExpired;
-	if(!(isNever) && new Date().getTime() > new Date(Number(note.expiresIn)).getTime() === true){ 
+	if(!(isComplete) && !(isNever) && new Date().getTime() > new Date(Number(note.expiresIn)).getTime() === true){ 
 		isExpired = true
 	}
 	
