@@ -93,6 +93,7 @@ export const LIST_NOTES = gql`
       					_id
 						title,
 						content,
+						expiresIn,
 						completed
       				}
 				}

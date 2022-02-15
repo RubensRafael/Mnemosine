@@ -42,11 +42,16 @@ export default function Card({ note }){
 
 	const toggleTrash = () => setTrashing(!(trashing))
 	const toggleMoveNote = () => setMoveNote(!(moveNote))
-	
+	 
 	const makeNoteDisappear = () => setRemovedNote(true)
-
+	const isNever = note.expiresIn === 'Never' ? true : false;
+	let isExpired;
+	if(!(isNever) && new Date().getTime() > new Date(Number(note.expiresIn)).getTime() === true){ 
+		isExpired = true
+	}
+	
 	return(
-	<>{ !(removedNote) ? <CardBox>
+	<>{ !(removedNote) ? <CardBox wasComplete={isComplete} expiresInfo={isExpired}>
 	   <CardHeader>
 	      <DefaultButton alt="check" onClick={()=>{if(!(loading)){toggleComplete({variables:{complete:!(isComplete),noteId:note._id,modifiedAt:String(new Date().getTime())}})}}} src={isComplete ? checked : uncheck}></DefaultButton>
 	      <DefaultButton alt="config" onClick={()=>{ setShowConfig(!(showConfig)) }} src={showConfig ? back : config} ></DefaultButton>
@@ -125,6 +130,7 @@ const CardBox = styled.div`
     width: 17%;
     flex-basis: 17%;
     border: #2055c0 solid 1px;
+	border-color:${({expiresInfo})=> expiresInfo === true ? 'red' : '#2055c0'};
     align-items: center;
     border-radius: 5px;
     margin: 3px;

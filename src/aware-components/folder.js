@@ -26,7 +26,7 @@ export default function Folder(props){
 			<FolderStatus>
 				<StatusCounter color="#2055c0" className='status-counter' title={`You have ${props.folder.count} notes here.`}>{props.folder.count}</StatusCounter>
 				<StatusCounter color="green" className='status-counter' title={`You have completed ${props.folder.completed} notes here.`}>{props.folder.completed}</StatusCounter>
-				<StatusCounter color="red" className='status-counter' title={`Have ${lateNotes} late notes here.`}>{lateNotes}</StatusCounter>
+				<StatusCounter color="red" className='status-counter' title={`You have ${lateNotes} late notes here.`}>{lateNotes}</StatusCounter>
 			</FolderStatus>
 			<FolderName title={props.folder.name}>{props.folder.name}</FolderName>
 		</FolderBox>
