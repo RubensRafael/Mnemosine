@@ -161,7 +161,7 @@ function Login({back}){
 
 						<RegisterForm>
 
-							{loading ? <LoadingIcon src={load} ></LoadingIcon> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Fill up the fields, to register an account</h3>
+							{loading ? <LoadingIcon src={load} ></LoadingIcon> : <><h3 style={{textAlign:"center",width:'100%',borderBottom:"solid 2px #2055c0"}} >Welcome Back!</h3>
 							
 							<LandInput onChange={(e)=>{setInputError('');setEmail(e.target.value)}} value={email} placeholder="email@host.com" type="email"></LandInput>
 							<LandInput onChange={(e)=>{setInputError('');setPw(e.target.value)}} value={pw} placeholder="Your password" type="password"></LandInput>
@@ -335,7 +335,7 @@ const RegisterForm = styled.form`
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	width: 60%;
+	width: 50%;
 	height: 350px;
     background-color: white;
 
