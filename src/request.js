@@ -7,7 +7,7 @@ import { setContext } from '@apollo/client/link/context';
 
 
 const httpLink = createHttpLink({
-  uri: 'https://mnemosine.herokuapp.com/graphql',
+  uri: 'https://mnemosine-api.onrender.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
